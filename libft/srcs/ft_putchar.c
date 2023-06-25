@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juzheng <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/21 14:49:28 by juzheng           #+#    #+#             */
-/*   Updated: 2023/06/21 14:49:29 by juzheng          ###   ########.fr       */
+/*   Created: 2023/06/25 17:22:40 by juzheng           #+#    #+#             */
+/*   Updated: 2023/06/25 17:22:41 by juzheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(int ac, char **av, char **env)
+void	ft_putchar(char c)
 {
-	(void)ac;
-	(void)av;
-	
-	ft_putchar('s');
-	return (0);
+	write(1, &c, 1);
 }

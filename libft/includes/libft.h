@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juzheng <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/21 14:49:28 by juzheng           #+#    #+#             */
-/*   Updated: 2023/06/21 14:49:29 by juzheng          ###   ########.fr       */
+/*   Created: 2023/06/25 16:16:46 by juzheng           #+#    #+#             */
+/*   Updated: 2023/06/25 16:16:47 by juzheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef LIBFT_H
+# define LIBFT_H
 
-int main(int ac, char **av, char **env)
-{
-	(void)ac;
-	(void)av;
-	
-	ft_putchar('s');
-	return (0);
-}
+# include <unistd.h>
+
+void	ft_putchar(char c);
+
+#endif

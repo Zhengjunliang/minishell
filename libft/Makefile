@@ -11,24 +11,36 @@
 # **************************************************************************** #
 
 NAME	=	libft.a
-SRCS	=
+
+CC		=	gcc
+CFLAGS	=	-Wall -Wextra -Werror -I includes/
+
+FILES	=	ft_putchar
+
+SRCS	=	$(addsuffix .c, $(addprefix srcs/, $(FILES)))
 
 OBJS	=	$(SRCS:.c=.o)
 
-CC		=	gcc
 RM		=	rm -f
-CFLAGS	=	-Wall -Wextra -Werror
+
 
 all:	$(NAME)
 
 $(NAME):	$(OBJS)
-		ar rcs $(NAME) $(OBJS)
+	@echo "\n\n\033[0;32mCompiling libft..."
+	@ar rc $(NAME) $^
+	@echo "\033[0m"
+
+%.o: %.c
+	@printf "\033[0;33mGenerating libft objects... %-33.33s\r" $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-		$(RM) $(NAME)
+	@$(RM) $(OBJS)
 
 fclean: clean
-		$(RM) $(NAME)
-re:		fclean $(NAME)
+	@$(RM) $(NAME)
+
+re:		fclean all
 
 .PHONY:		all clean fclean re

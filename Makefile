@@ -13,7 +13,7 @@
 NAME	=	minishell
 
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -I includes/
 
 LIBFT	=	libft/libft.a
 
@@ -26,22 +26,30 @@ RM		=	rm -f
 
 all:	$(NAME)
 
-.c.o:
-	@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I includes/
-
 $(NAME):	$(OBJS)
+	@echo "\n"
 	@make -C libft/
 	@echo	"\033[0;32mCompiling minishell..."
 	@$(CC)	$(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+	@echo "\n\033[0mDone!"
+
+%.o: %.c
+	@printf "\033[0;33mGenerating minishell objects... %-33.33s\r" $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@echo "\033[0;31mCleaning libft..."
 	@make clean -C libft/
 	@$(RM) $(OBJS)
+	@echo "\033[0m"
 
-fclean:	clean
-	@$(RM) $(NAME) $(all)
+fclean:
+	@echo "\033[0;31mCleaning libft..."
+	@make fclean -C libft/
+	@echo "\nDeleting object..."
+	@$(RM) $(OBJS) $(NAME)
+	@echo "\033[0m"
 
-re:	fclean $(NAME)
+re:	fclean all
 
 .PHONY:	all clean fclean re
