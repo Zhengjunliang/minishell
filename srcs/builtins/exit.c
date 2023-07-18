@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juzheng <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/25 17:22:40 by juzheng           #+#    #+#             */
-/*   Updated: 2023/06/25 17:22:41 by juzheng          ###   ########.fr       */
+/*   Created: 2023/07/18 16:39:16 by juzheng           #+#    #+#             */
+/*   Updated: 2023/07/18 16:39:17 by juzheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_putchar(char c)
+void	mini_exit(t_mini *mini, char **cmd)
 {
-	write(1, &c, 1);
+	mini->exit = 1;
+	ft_putstr_fd("exit ", 2);
+	if (cmd[1] && cmd[2])
+	{
+		mini->ret = 1;
+		ft_putendl_fd("minishell: exit: too many arguments", 2);
+	}
 }

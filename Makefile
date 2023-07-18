@@ -17,9 +17,21 @@ CFLAGS	=	-Wall -Wextra -Werror -I includes/
 
 LIBFT	=	libft/libft.a
 
-MAIN	=	minishell
+BUILTINS	=	exit
 
-SRC 	=	$(addsuffix .c, $(addprefix srcs/main/, $(MAIN)))
+ENV		=	env
+
+EXEC	=	exec
+
+MAIN	=	minishell free
+
+PARSING	=	line parsing tokens token
+
+SRC 	=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
+			$(addsuffix .c, $(addprefix srcs/env/, $(ENV))) \
+			$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
+			$(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
+			$(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING)))
 
 OBJS	=	$(SRC:.c=.o)
 RM		=	rm -f
