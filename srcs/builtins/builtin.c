@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juzheng <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 14:47:12 by juzheng           #+#    #+#             */
-/*   Updated: 2023/07/18 14:47:13 by juzheng          ###   ########.fr       */
+/*   Created: 2023/07/22 16:44:53 by juzheng           #+#    #+#             */
+/*   Updated: 2023/07/22 16:44:54 by juzheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strchr(const char *s, int c)
+int	is_builtin(char *cmd)
 {
-	int	i;
+	if (ft_strcmp(cmd, "echo") == 0)
+		return (1);
+	if (ft_strcmp(cmd, "cd") == 0)
+		return (1);
+	if (ft_strcmp(cmd, "pwd") == 0)
+		return (1);
+	return (0);
+}
 
-	i = 0;
-	while (s[i] != c)
-	{
-		if (s[i] == '\0')
-			return (NULL);
-		i++;
-	}
-	return ((char *)s + 1);
+int	exec_builtin(char **args, t_mini *mini)
+{
+	int	result;
+
+	result = 0;
+	mini->ret = 1;
+	if (ft_strcmp(args[0], "echo") == 0)
+		result = ft_echo(args);
+	return (result);
 }

@@ -17,7 +17,7 @@ CFLAGS	=	-Wall -Wextra -Werror -I includes/
 
 LIBFT	=	libft/libft.a
 
-BUILTINS	=	exit
+BUILTINS	=	exit builtin echo
 
 ENV		=	env
 

@@ -15,20 +15,19 @@
 void	redir_and_exec(t_mini *mini, t_token *token)
 {
 	exec_cmd(mini, token);
-
 }
 
 void	minishell(t_mini *mini)
 {
 	t_token	*token;
-	int		status;
+	//int		status;
 
-	status = 0;
-	token = next_run(mini->start, 0);
-	while ((mini->exit == 0 && token) && status == 0)
+	//status = 0;
+	token = next_run(mini->start, NOSKIP);
+	while (mini->exit == 0 && token)
 	{
 		redir_and_exec(mini, token);
-		status = 1;
+		token = next_run(token, SKIP);
 	}
 }
 

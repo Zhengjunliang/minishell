@@ -12,12 +12,17 @@
 
 #include "minishell.h"
 
-/*int	ignore_sep(char *line, int i)
+int	is_sep(char *line, int i)
 {
-	if (line[i] && line[i] == '\\' && line[i + 1] && line[i + 1] == ';')
+	if (i > 0 && line[i - 1] == '\\' && ft_strchr("<>|;", line[i]))
+		return (0);
+	else if (ft_strchr("<>|;", line[i]) && quotes(line, i) == 0)
 		return (1);
-}*/
+	else
+		return (0);
+}
 
+/*Guarda se le virgolette sono chiuse se si return 0*/
 int	quotes(char *line, int index)
 {
 	int	i;

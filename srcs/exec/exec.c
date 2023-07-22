@@ -27,7 +27,7 @@ char	**cmd_tab(t_token *start)
 		token = token->next;
 		i++;
 	}
-	if (!(tab = malloc(sizeof(char *) * 1)))
+	if (!(tab = malloc(sizeof(char *) * i)))
 		return (NULL);
 	token = start->next;
 	tab[0] = start->str;
@@ -44,16 +44,19 @@ char	**cmd_tab(t_token *start)
 void	exec_cmd(t_mini *mini, t_token *token)
 {
 	char	**cmd;
-	int		i;
+	//int		i;
 
 	mini->ret = 1;
 	cmd = cmd_tab(token);
-	i = 0;
-	while (cmd && cmd[i])
+	//i = 0;
+	/*while (cmd && cmd[i])
 	{
-		ft_putendl_fd(cmd[i], 2);
+		//ft_putendl_fd(cmd[i], 2);
 		i++;
-	}
+	}*/
 	if (cmd && ft_strcmp(cmd[0], "exit") == 0)
 		mini_exit(mini, cmd);
+	else if (cmd && is_builtin(cmd[0]))
+		mini->ret = exec_builtin(cmd, mini);
+	//free_tab(cmd);
 }
