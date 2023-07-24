@@ -20,6 +20,12 @@ int	is_builtin(char *cmd)
 		return (1);
 	if (ft_strcmp(cmd, "pwd") == 0)
 		return (1);
+	if (ft_strcmp(cmd, "env") == 0)
+		return (1);
+	if (ft_strcmp(cmd, "export") == 0)
+		return (1);
+	if (ft_strcmp(cmd, "unset") == 0)
+		return (1);
 	return (0);
 }
 
@@ -31,5 +37,13 @@ int	exec_builtin(char **args, t_mini *mini)
 	mini->ret = 1;
 	if (ft_strcmp(args[0], "echo") == 0)
 		result = ft_echo(args);
+	//if (ft_strcmp(args[0], "cd") == 0)
+		//result = ft_cd(args, mini->env);
+	if (ft_strcmp(args[0], "pwd") == 0)
+		result = ft_pwd();
+	if (ft_strcmp(args[0], "env") == 0)
+		ft_env(mini->env);
+	//if (ft_strcmp(args[0], "export") == 0)
+		//ft_export(args, mini->env);
 	return (result);
 }

@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+t_sig	g_sig;
+
 void	redir_and_exec(t_mini *mini, t_token *token)
 {
 	exec_cmd(mini, token);
@@ -42,6 +44,7 @@ int main(int ac, char **av, char **env)
 	env_init(&mini, env);
 	while (mini.exit == 0)
 	{
+		sig_init();
 		parse(&mini);
 		if (mini.start != NULL)
 			minishell(&mini);

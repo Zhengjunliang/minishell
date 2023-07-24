@@ -17,13 +17,13 @@ CFLAGS	=	-Wall -Wextra -Werror -I includes/
 
 LIBFT	=	libft/libft.a
 
-BUILTINS	=	exit builtin echo
+BUILTINS	=	exit builtin echo pwd env cd export
 
-ENV		=	env
+ENV		=	env get_env
 
 EXEC	=	exec
 
-MAIN	=	minishell free
+MAIN	=	minishell free signal
 
 PARSING	=	line parsing tokens token
 

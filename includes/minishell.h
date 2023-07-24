@@ -15,6 +15,9 @@
 
 # include "../libft/includes/libft.h"
 # include <stdlib.h>
+# include <limits.h>
+# include <signal.h>
+# include <fcntl.h>
 
 # define SKIP 1
 # define NOSKIP 0
@@ -41,6 +44,14 @@ typedef struct s_mini
 	int				exit;
 }				t_mini;
 
+typedef struct s_sig
+{
+	int			sigint;
+	int			sigquit;
+	int			exit_status;
+	pid_t		pid;
+}				t_sig;
+
 /*
 ** PARSING	
 */
@@ -62,6 +73,10 @@ void	mini_exit(t_mini *mini, char **cmd);
 int	is_builtin(char *cmd);
 int	exec_builtin(char **args, t_mini *mini);
 int	ft_echo(char **args);
+int	ft_pwd(void);
+int	ft_env(t_env *env);
+int	ft_cd(char **args, t_env *env);
+int	ft_export(char **args, t_env *env);
 
 /*
 ** EXEC
@@ -75,4 +90,12 @@ void	free_token(t_token *start);
 void	free_env(t_env *env);
 void	free_tab(char **tab);
 
+/*
+**SIGNAL
+*/
+void	sig_init(void);
+void	sig_int(int code);
+void	sig_quit(int code);
+
+extern t_sig g_sig;
 #endif

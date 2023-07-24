@@ -79,14 +79,17 @@ void	parse(t_mini *mini)
 	char	*line;
 	//t_token	*token;
 
+	signal(SIGINT, &sig_int); // Control -C
+	signal(SIGQUIT, &sig_quit); // Control -"\"
 	mini->ret ? ft_putstr_fd("🤬 ", 2) : ft_putstr_fd("😎 ", 2); // ret = 0 se commandi giusti altrimente vuol fire non giusto
 	ft_putstr_fd("\033[0;36m\033[1mminishell ▸ \033[0m", 2);
 	/*lexer il commando e memorizzare in line*/
 	if (get_next_line(0, &line) == -2 && (mini->exit = 1))
 		ft_putendl_fd("exit", 2);
+	mini->ret = (g_sig.sigint == 1) ? g_sig.exit_status : mini->ret;
 	if (quote_check(mini, &line))
 		return ;
-	line = space_line(line);
+	//line = space_line(line);
 	mini->start = get_tokens(line); // Suddivido i commandi in varie word e li memorizzo in token
 	ft_memdel(line);
 	//token = mini->start;

@@ -16,7 +16,8 @@ CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror -I includes/
 
 FILES	=	ft_putstr_fd ft_strdup get_next_line ft_memdel ft_putendl_fd \
-			ft_skip_space ft_strchr ft_strcmp
+			ft_skip_space ft_strchr ft_strcmp ft_putendl ft_strjoin ft_itoa \
+			
 
 SRCS	=	$(addsuffix .c, $(addprefix srcs/, $(FILES)))
 
