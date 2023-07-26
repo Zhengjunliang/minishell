@@ -23,9 +23,9 @@ ENV		=	env get_env
 
 EXEC	=	exec
 
-MAIN	=	minishell free signal
+MAIN	=	minishell free signal redir fd
 
-PARSING	=	line parsing tokens token
+PARSING	=	line parsing tokens token type
 
 SRC 	=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
 			$(addsuffix .c, $(addprefix srcs/env/, $(ENV))) \

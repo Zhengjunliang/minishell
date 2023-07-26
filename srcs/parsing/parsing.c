@@ -22,6 +22,20 @@ int	is_sep(char *line, int i)
 		return (0);
 }
 
+int	ignore_sep(char *line, int i)
+{
+	if (line[i] && line[i] == '\\' && line[i + 1] && line[i + 1] == ';')
+		return (1);
+	else if (line[i] && line[i] == '\\' && line[i + 1] && line[i + 1] == '|')
+		return (1);
+	else if (line[i] && line[i] == '\\' && line[i + 1] && line[i + 1] == '>')
+		return (1);
+	else if (line[i] && line[i] == '\\' && line[i + 1] && line[i + 1] == '>'
+				&& line[i + 2] && line[i + 2] == '>')
+		return (1);
+	return (0);
+}
+
 /*Guarda se le virgolette sono chiuse se si return 0*/
 int	quotes(char *line, int index)
 {

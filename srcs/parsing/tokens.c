@@ -12,6 +12,39 @@
 
 #include "minishell.h"
 
+void	type_arg(t_token *token, int separator)
+{
+	if (ft_strcmp(token->str, "") == 0)
+		token->type = EMPTY;
+	else if (ft_strcmp(token->str, ">") == 0 && separator == 0)
+		token->type = TRUNC;
+	else if (ft_strcmp(token->str, ">>") == 0 && separator == 0)
+		token->type = APPEND;
+	else if (ft_strcmp(token->str, "<") == 0 && separator == 0)
+		token->type = INPUT;
+	else if (ft_strcmp(token->str, "|") == 0 && separator == 0)
+		token->type = PIPE;
+	else if (ft_strcmp(token->str, ";") == 0 && separator == 0)
+		token->type = END;
+	else if (token->prev == NULL || token->prev->type >= TRUNC)
+		token->type = CMD;
+	else
+		token->type = ARG;
+}
+
+/*void	squish_args(t_mini *mini)
+{
+	t_token	*token;
+	t_token	*prev;
+
+	token = mini->start;
+	while (token)
+	{
+		prev = prev_sep(token, NOSKIP);
+	}
+
+}*/
+
 int	next_alloc(char *line, int *i)
 {
 	int		count;
@@ -73,7 +106,7 @@ t_token	*get_tokens(char *line)
 	t_token	*prev;
 	t_token	*next;
 	int	i;
-	//int	sep;
+	int	sep;
 
 	prev = NULL;
 	next = NULL;
@@ -81,11 +114,13 @@ t_token	*get_tokens(char *line)
 	ft_skip_space(line, &i);
 	while (line[i])
 	{
+		sep = ignore_sep(line, i);
 		next = next_token(line, &i);
 		next->prev = prev;
 		if (prev)
 			prev->next = next;
 		prev = next;
+		type_arg(next, sep);
 		ft_skip_space(line, &i);
 	}
 	if (next)

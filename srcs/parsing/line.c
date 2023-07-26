@@ -77,7 +77,7 @@ int	quote_check(t_mini *mini, char **line)
 void	parse(t_mini *mini)
 {
 	char	*line;
-	//t_token	*token;
+	t_token	*token;
 
 	signal(SIGINT, &sig_int); // Control -C
 	signal(SIGQUIT, &sig_quit); // Control -"\"
@@ -89,12 +89,16 @@ void	parse(t_mini *mini)
 	mini->ret = (g_sig.sigint == 1) ? g_sig.exit_status : mini->ret;
 	if (quote_check(mini, &line))
 		return ;
-	//line = space_line(line);
+	line = space_line(line);
+	if (line && line[0] == '$')
+		line[0] = (char)(-line[0]);
 	mini->start = get_tokens(line); // Suddivido i commandi in varie word e li memorizzo in token
 	ft_memdel(line);
-	//token = mini->start;
-	/*while (token)
+	token = mini->start;
+	while (token)
 	{
+		if (is_type(token, ARG))
+			type_arg(token, 0);
 		token = token->next;
-	}*/
+	}
 }
