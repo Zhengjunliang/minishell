@@ -31,10 +31,10 @@ void	set_env(t_mini **mini, char **envp)
 void	init_mini(t_mini **mini, char **envp)
 {
 	g_exit = 0;
-	(*mini)->exit = 0;
 	*mini = ft_calloc(sizeof(t_mini), 1);
-	//(*mini)->prompt = ft_strjoin("\033[0;36m", getenv("USER"));
-	//(*mini)->prompt = ft_strjoin2((*mini)->prompt, "@minishell: \033[0;37m");
+	(**mini).exit = 0;
+	(*mini)->prompt = ft_strjoin("\033[0;36m", getenv("USER"));
+	(*mini)->prompt = ft_strjoin2((*mini)->prompt, "@minishell: \033[0;37m");
 	set_env(mini, envp);
 }
 
@@ -76,15 +76,17 @@ int main(int ac, char **av, char **envp)
 		exit(0);
 	}
 	init_mini(&mini, envp);
-	while (mini->exit == 0)
+	while (1)
 	{
 		sig_init();
-		//mini->input = readline(mini->prompt);
-		parse(mini);
-		if (mini->start != NULL)
-			minishell(mini);
-		free_token(mini->start);
+		mini->input = readline(mini->prompt);
+		//parse(mini);
+		//if (mini->start != NULL)
+			//minishell(mini);
+		//free_token(mini->start);
 		free(mini->input);
 	}
+	rl_clear_history();
+	free_all(&mini);
 	exit (EXIT_SUCCESS);
 }

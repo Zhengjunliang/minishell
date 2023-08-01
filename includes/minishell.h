@@ -99,7 +99,7 @@ void	exec_cmd(t_mini *mini, t_token *token);
 /*
 ** FREE
 */
-void	free_token(t_token *start);
+void	free_all(t_mini **ms);
 void	free_tab(char **tab);
 
 /*

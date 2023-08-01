@@ -12,19 +12,21 @@
 
 #include "minishell.h"
 
-void	free_token(t_token *start)
+void	free_all(t_mini **ms)
 {
-	while (start && start->next)
-	{
-		ft_memdel(start->str);
-		start = start->next;
-		ft_memdel(start->prev);
-	}
-	if (start)
-	{
-		ft_memdel(start->str);
-		ft_memdel(start);
-	}
+	int	i;
+
+	i = -1;
+	while ((*ms)->env[++i])
+		free((*ms)->env[i]);
+	i = -1;
+	//while ((*ms)->path[++i])
+	//	free((*ms)->path[i]);
+	//free((*ms)->path);
+	free((*ms)->prompt);
+	free((*ms)->input);
+	free((*ms)->env);
+	free(*ms);
 }
 
 void	free_tab(char **tab)
