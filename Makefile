@@ -19,16 +19,13 @@ LIBFT	=	libft/libft.a
 
 BUILTINS	=	exit builtin echo pwd env cd export
 
-ENV		=	env get_env
-
 EXEC	=	exec
 
-MAIN	=	minishell free signal redir fd
+MAIN	=	main free signal redir fd
 
 PARSING	=	line parsing tokens token type
 
 SRC 	=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
-			$(addsuffix .c, $(addprefix srcs/env/, $(ENV))) \
 			$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
 			$(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
 			$(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING)))
@@ -42,7 +39,7 @@ $(NAME):	$(OBJS)
 	@echo "\n"
 	@make -C libft/
 	@echo	"\033[0;32mCompiling minishell..."
-	@$(CC)	$(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+	@$(CC)	$(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) -lreadline
 	@echo "\n\033[0mDone!"
 
 %.o: %.c

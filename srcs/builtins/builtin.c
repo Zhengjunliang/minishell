@@ -42,7 +42,7 @@ int	exec_builtin(char **args, t_mini *mini)
 	if (ft_strcmp(args[0], "pwd") == 0)
 		result = ft_pwd();
 	if (ft_strcmp(args[0], "env") == 0)
-		ft_env(mini->env);
+		ft_env(&mini);
 	//if (ft_strcmp(args[0], "export") == 0)
 		//ft_export(args, mini->env);
 	return (result);

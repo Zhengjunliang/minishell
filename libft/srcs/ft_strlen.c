@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juzheng <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 12:17:23 by juzheng           #+#    #+#             */
-/*   Updated: 2023/07/24 12:17:26 by juzheng          ###   ########.fr       */
+/*   Created: 2023/08/01 15:13:55 by juzheng           #+#    #+#             */
+/*   Updated: 2023/08/01 15:13:55 by juzheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_env(t_mini **mini)
+int	ft_strlen(const char *str)
 {
 	int	i;
 
-	i = -1;
-	while ((*mini)->env[++i])
-		printf("%s\n", (*mini)->env[i]);
-	g_exit = 0;
+	i = 0;
+	if (str)
+	{
+		while (str[i] != '\0')
+		{
+			i++;
+		}
+		return (i);
+	}
+	else
+		return (-1);
 }

@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juzheng <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 12:17:23 by juzheng           #+#    #+#             */
-/*   Updated: 2023/07/24 12:17:26 by juzheng          ###   ########.fr       */
+/*   Created: 2023/08/01 14:45:39 by juzheng           #+#    #+#             */
+/*   Updated: 2023/08/01 14:45:40 by juzheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_env(t_mini **mini)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
+	size_t	i;
+	char	*str;
 
-	i = -1;
-	while ((*mini)->env[++i])
-		printf("%s\n", (*mini)->env[i]);
-	g_exit = 0;
+	i = 0;
+	str = (char *)s;
+	while (i < n)
+	{
+		str[i] = '\0';
+		i++;
+	}
 }

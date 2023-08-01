@@ -81,8 +81,7 @@ void	parse(t_mini *mini)
 
 	signal(SIGINT, &sig_int); // Control -C
 	signal(SIGQUIT, &sig_quit); // Control -"\"
-	mini->ret ? ft_putstr_fd("🤬 ", 2) : ft_putstr_fd("😎 ", 2); // ret = 0 se commandi giusti altrimente vuol fire non giusto
-	ft_putstr_fd("\033[0;36m\033[1mminishell ▸ \033[0m", 2);
+	ft_putstr_fd("\033[0;36m\033[1mminishell $ \033[0m", 2);
 	/*lexer il commando e memorizzare in line*/
 	if (get_next_line(0, &line) == -2 && (mini->exit = 1))
 		ft_putendl_fd("exit", 2);
