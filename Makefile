@@ -21,13 +21,14 @@ BUILTINS	=	exit builtin echo pwd env cd export
 
 EXEC	=	exec
 
-MAIN	=	main free signal redir fd
+MAIN	=	main free signal
 
-PARSING	=	line parsing tokens token type
+UTILS	=	ft_split1 ft_countwords1
 
 SRC 	=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
 			$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
 			$(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
+			$(addsuffix .c, $(addprefix srcs/utils/, $(UTILS))) \
 			$(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING)))
 
 OBJS	=	$(SRC:.c=.o)

@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-t_sig	g_sig;
 int	g_exit;
 
 void	set_env(t_mini **mini, char **envp)
@@ -32,39 +31,48 @@ void	init_mini(t_mini **mini, char **envp)
 {
 	g_exit = 0;
 	*mini = ft_calloc(sizeof(t_mini), 1);
-	(**mini).exit = 0;
 	(*mini)->prompt = ft_strjoin("\033[0;36m", getenv("USER"));
 	(*mini)->prompt = ft_strjoin2((*mini)->prompt, "@minishell: \033[0;37m");
 	set_env(mini, envp);
 }
 
-void	redir_and_exec(t_mini *mini, t_token *token)
+static int	is_valid_input(char *s)
 {
-	//t_token	*prev;
-	//t_token	*next;
+	int	i;
 
-	//prev = prev_sep(token, NOSKIP);
-	//next = next_sep(token, NOSKIP);
-
-
-	exec_cmd(mini, token);
-}
-
-void	minishell(t_mini *mini)
-{
-	t_token	*token;
-	int		status;
-
-	token = next_run(mini->start, NOSKIP);
-	while (mini->exit == 0 && token)
+	i = -1;
+	while (s[++i])
 	{
-		//mini->last = 1;
-		redir_and_exec(mini, token);
-		waitpid(-1, &status, 0);
-		status = WEXITSTATUS(status);
-		token = next_run(token, SKIP);
+		if (s[i] > 33 && s[i] != 127)
+			return (1);
 	}
+	return (0);
 }
+
+int	check_exit(t_mini **mini)
+{
+	if (!(*mini)->input)
+	{
+		printf("exit\n");
+		return (1);
+	}
+	if (!ft_strncmp((*mini)->input, "exit", 4))
+	{
+		if (!ft_strncmp((*mini)->input, "exit ", 5))
+		{
+			//ft_exit(mini);
+			return (2);
+		}
+		else
+		{
+			printf("exit\n");
+			return (1);
+		}
+		free((*mini)->input);
+	}
+	return (0);
+}
+
 
 int main(int ac, char **av, char **envp)
 {
@@ -78,12 +86,17 @@ int main(int ac, char **av, char **envp)
 	init_mini(&mini, envp);
 	while (1)
 	{
-		sig_init();
+		signal(SIGINT, &sig_int); // Control -C
+		signal(SIGQUIT, SIG_IGN); // Control -"\"
+		mini->hist = true;
 		mini->input = readline(mini->prompt);
-		//parse(mini);
-		//if (mini->start != NULL)
-			//minishell(mini);
-		//free_token(mini->start);
+		mini->exit = check_exit(&mini);
+		if (mini->exit == 1)
+			break ;
+		if (is_valid_input(mini->input))
+			cmd_builder(&mini);
+		if (ft_strlen(mini->input) != 0 && mini->hist == true)
+			add_history(mini->input);
 		free(mini->input);
 	}
 	rl_clear_history();

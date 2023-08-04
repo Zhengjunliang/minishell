@@ -29,17 +29,21 @@ void	free_all(t_mini **ms)
 	free(*ms);
 }
 
-void	free_tab(char **tab)
+void	free_cmd(t_cmd *cmd)
 {
-	int	i;
+	int		i;
+	t_cmd	*tmp;
 
-	i = 0;
-	while (tab[i])
+	while (cmd)
 	{
-		if (tab[i])
-			ft_memdel(tab[i]);
-		i++;
+		if (cmd->cmd != NULL)
+			free(cmd->cmd);
+		i = -1;
+		while (cmd->cmds[++i])
+			free(cmd->cmds[i]);
+		free(cmd->cmds);
+		tmp = cmd->next;
+		free(cmd);
+		cmd = tmp;
 	}
-	if (tab)
-		ft_memdel(tab);
 }
