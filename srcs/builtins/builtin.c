@@ -12,9 +12,10 @@
 
 #include "minishell.h"
 
-bool	ft_builtin(t_mini **ms, t_cmd **cmd)
+bool	ft_builtin(t_mini **ms, t_cmd *cmd)
 {
-	if (!ft_strncmp(&(cmd[0]), "pwd", 4))
+	(void)ms;
+	if (!ft_strncmp(cmd->cmds[0], "pwd", 4))
 		ft_pwd();
 	//else if (!ft_strncmp(cmd->cmds[0], "clear", 6))
 		//ft_clear();

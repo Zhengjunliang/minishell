@@ -17,13 +17,14 @@ CFLAGS	=	-Wall -Wextra -Werror -I includes/
 
 LIBFT	=	libft/libft.a
 
-BUILTINS	=	exit builtin echo pwd env cd export
+BUILTINS	=	exit builtin echo pwd env cd export \
+				cmdlst
 
 EXEC	=	exec
 
 MAIN	=	main free signal
 
-UTILS	=	ft_split1 ft_countwords1
+UTILS	=	ft_split1 ft_countwords1 ft_subsplit ft_creatlist
 
 SRC 	=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
 			$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \

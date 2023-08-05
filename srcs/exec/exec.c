@@ -21,21 +21,23 @@ void	cmd_builder(t_mini **ms)
 	//i = -1;
 	//while ((*ms)->cmd[++i])
 		//(*ms)->cmd[i] = ft_expander((*ms)->cmd[i]);
-	//(*ms)->list = ft_subsplit((*ms)->cmd);
+	(*ms)->list = ft_subsplit((*ms)->cmd);
 	//ft_trimlist((*ms)->list);
-	//(*ms)->cmd_list = create_cmdlst((*ms)->list, *ms);
-	//if ((*ms)->cmd_list == NULL && (*ms)->hist)
-	//	perror("Wrong syntax");
+	(*ms)->cmd_list = create_cmdlst((*ms)->list, *ms);
+	if ((*ms)->cmd_list == NULL && (*ms)->hist)
+		perror("Wrong syntax");
 	if (g_exit == 1234)
 		g_exit = 1;
 	else
-		exec_cmd(ms, (*ms)->cmd);
+		exec_cmd(ms, (*ms)->cmd_list);
 	free_cmd((*ms)->cmd_list);
 	return ;
 }
 
-void	exec_cmd(t_mini **ms, char **cmd)
+void	exec_cmd(t_mini **ms, t_cmd *cmd_list)
 {
-	if (ft_builtin(ms, cmd) == false)
-		 ;
+	if (!cmd_list)
+		return ;
+	if (ft_builtin(ms, cmd_list) == false)
+		printf("Hello");
 }

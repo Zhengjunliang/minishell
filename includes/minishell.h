@@ -37,6 +37,7 @@ typedef struct s_mini
 {
 	char			*input;
 	char			**env;
+	char		**path;
 	char			*prompt;
 	char			**cmd;
 	bool			hist;
@@ -53,14 +54,15 @@ void	ft_env(t_mini **mini);
 /*
 ** BUILTINS
 */
-bool	ft_builtin(t_mini **ms, t_cmd **cmd);
+bool	ft_builtin(t_mini **ms, t_cmd *cmd);
 int	ft_echo(char **args);
 int	ft_pwd(void);
-
+t_cmd	*create_cmdlst(t_list	*lst, t_mini *ms);
 /*
 ** EXEC
 */
 void	cmd_builder(t_mini **ms);
+void	exec_cmd(t_mini **ms, t_cmd *cmd_list);
 
 /*
 ** FREE
@@ -72,8 +74,12 @@ void	free_cmd(t_cmd *cmd);
 **UTILS
 */
 void	ft_skip_space(char *s, int *i);
+char	**ft_split1(char *s);
+void	ft_close_quote(char *s, int *i, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int	ft_countwords1(char *s);
+t_list	*ft_subsplit(char **tab);
+t_list	*ft_createlist(char **tab);
 /*
 **SIGNAL
 */

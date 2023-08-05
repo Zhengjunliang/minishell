@@ -18,6 +18,10 @@ void	set_env(t_mini **mini, char **envp)
 {
 	int	i;
 
+	i = -1;
+	(*mini)->path = ft_split(getenv("PATH"), ':');
+	while ((*mini)->path[++i])
+		(*mini)->path[i] = ft_strjoin2((*mini)->path[i], "/");
 	i = 0;
 	while (envp[i])
 		i++;

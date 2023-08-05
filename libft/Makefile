@@ -17,7 +17,8 @@ CFLAGS	=	-Wall -Wextra -Werror -I includes/
 
 FILES	=	ft_putstr_fd ft_strdup get_next_line ft_memdel ft_putendl_fd \
 			ft_strchr ft_strcmp ft_putendl ft_strjoin ft_itoa \
-			ft_calloc ft_bzero ft_strlen ft_strncmp
+			ft_calloc ft_bzero ft_strlen ft_strncmp \
+			ft_lstadd_front ft_lstnew ft_split
 
 SRCS	=	$(addsuffix .c, $(addprefix srcs/, $(FILES)))
 
