@@ -12,39 +12,29 @@
 
 #include "minishell.h"
 
-static int	nb_args(char **args)
+void	ft_echo(t_cmd *cmd)
 {
-	int	size;
-
-	size = 0;
-	while (args[size])
-		size++;
-	return (size);
-}
-
-int	ft_echo(char **args)
-{
+	int	flag;
 	int	i;
-	int	n_option;
 
-	i = 1;
-	n_option = 0;
-	if (nb_args(args) > 1)
+	flag = 0;
+	i = 0;
+	if (cmd->cmds[i])
 	{
-		while (args [i] && ft_strcmp(args[i], "-n") == 0)
+		while (cmd->cmds[++i])
 		{
-			n_option = 1;
-			i++;
+			if (!ft_strncmp(cmd->cmds[1], "-n", 2))
+			{
+				flag = 1;
+				i++;
+			}
+			if (cmd->cmds[i + 1])
+				printf("%s ", cmd->cmds[i]);
+			else
+				printf("%s", cmd->cmds[i]);
 		}
-		while (args[i])
-		{
-			ft_putstr_fd(args[i], 1);
-			if (args[i + 1] && args[i][0] != '\0')
-				write(1, " ", 1);
-			i++;
-		}
+		if (flag == 0)
+			printf("\n");
 	}
-	if (n_option == 0)
-		write(1, "\n", 1);
-	return (0);
+	g_exit = 0;
 }

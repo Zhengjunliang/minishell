@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juzheng <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 12:03:14 by juzheng           #+#    #+#             */
-/*   Updated: 2023/07/24 12:03:15 by juzheng          ###   ########.fr       */
+/*   Created: 2023/08/06 15:32:19 by juzheng           #+#    #+#             */
+/*   Updated: 2023/08/06 15:32:20 by juzheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_pwd(t_mini **ms)
+int	ft_isdigit(int num)
 {
-	(*ms)->pwd = getcwd(NULL, 0);
-	getcwd((*ms)->pwd, sizeof((*ms)->pwd));
-	printf("%s\n", (*ms)->pwd);
-	free((*ms)->pwd);
-	g_exit = 0;
+	if (num >= '0' && num <= '9')
+		return (1);
+	else
+		return (0);
 }

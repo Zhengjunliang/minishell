@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juzheng <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 14:22:20 by juzheng           #+#    #+#             */
-/*   Updated: 2023/07/24 14:22:21 by juzheng          ###   ########.fr       */
+/*   Created: 2023/08/06 15:32:33 by juzheng           #+#    #+#             */
+/*   Updated: 2023/08/06 15:32:34 by juzheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-/*int	ft_export(char **args, t_env *env)
+int	ft_isalpha(int c)
 {
-	int	new_env;
-	int	error_ret;
-
-	new_env = 0;
-	if (!args[1])
-	{
-
-	}
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
 	else
-	{
-		error_ret = 
-	}
-}*/
+		return (0);
+}

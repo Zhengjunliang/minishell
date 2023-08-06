@@ -40,4 +40,5 @@ void	exec_cmd(t_mini **ms, t_cmd *cmd_list)
 		return ;
 	if (ft_builtin(ms, cmd_list) == false)
 		printf("Hello");
+	(*ms)->pipe = 0;
 }

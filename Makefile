@@ -17,7 +17,7 @@ CFLAGS	=	-Wall -Wextra -Werror -I includes/
 
 LIBFT	=	libft/libft.a
 
-BUILTINS	=	exit builtin echo pwd env cd export \
+BUILTINS	=	exit builtin echo pwd env cd \
 				cmdlst
 
 EXEC	=	exec

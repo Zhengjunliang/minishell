@@ -37,10 +37,13 @@ typedef struct s_mini
 {
 	char			*input;
 	char			**env;
+	char			**new_env;
+	char		*pwd;
 	char		**path;
 	char			*prompt;
 	char			**cmd;
 	bool			hist;
+	int				pipe;
 	t_cmd			*cmd_list;
 	t_list			*list;
 	int				exit;
@@ -50,13 +53,16 @@ typedef struct s_mini
 ** ENV
 */
 void	ft_env(t_mini **mini);
+void	ft_export(t_mini **ms, t_cmd *cmd);
+void	ft_unset(t_mini **ms, t_cmd *cmd);
 
 /*
 ** BUILTINS
 */
 bool	ft_builtin(t_mini **ms, t_cmd *cmd);
-int	ft_echo(char **args);
-int	ft_pwd(void);
+void	ft_echo(t_cmd *cmd);
+void	ft_pwd(t_mini **ms);
+void	ft_cd(t_mini **ms, t_cmd *cmd);
 t_cmd	*create_cmdlst(t_list	*lst, t_mini *ms);
 /*
 ** EXEC

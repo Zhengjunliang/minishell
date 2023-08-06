@@ -35,8 +35,8 @@ void	init_mini(t_mini **mini, char **envp)
 {
 	g_exit = 0;
 	*mini = ft_calloc(sizeof(t_mini), 1);
-	(*mini)->prompt = ft_strjoin("\033[0;36m", getenv("USER"));
-	(*mini)->prompt = ft_strjoin2((*mini)->prompt, "@minishell: \033[0;37m");
+	(*mini)->prompt = ft_strjoin("\033[0;36m", "minishell");
+	(*mini)->prompt = ft_strjoin2((*mini)->prompt, "$ \033[0;37m");
 	set_env(mini, envp);
 }
 
@@ -90,7 +90,7 @@ int main(int ac, char **av, char **envp)
 	init_mini(&mini, envp);
 	while (1)
 	{
-		signal(SIGINT, &sig_int); // Control -C
+		signal(SIGINT, sig_int); // Control -C
 		signal(SIGQUIT, SIG_IGN); // Control -"\"
 		mini->hist = true;
 		mini->input = readline(mini->prompt);

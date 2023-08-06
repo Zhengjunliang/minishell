@@ -12,34 +12,26 @@
 
 #include "minishell.h"
 
-/*static int	update_oldpwd(t_env *env)
+void	ft_cd(t_mini **ms, t_cmd *cmd)
 {
-	char	cwd[PATH_MAX];
-	char	*oldpwd;
-
-	if (getcwd(cwd, PATH_MAX) == NULL)
-		return (1);
-	if (!(oldpwd = ft_strjoin("OLDPWD=", cwd)))
-		return (1);
-	//if ()	
-}
-
-static int	go_to_path(int option, t_env *env)
-{
-	int	ret;
-	char	*env_path;
-
-	env_path = NULL;
-	if (option == 0)
+	if ((*ms)->pipe == 0)
 	{
-
+		if (!cmd->cmds[1])
+		{
+			g_exit = 0;
+			chdir(getenv("HOME"));
+		}
+		else if (cmd->cmds[2])
+		{
+			g_exit = 1;
+			write(STDERR_FILENO, "cd : Too many arguments\n", 25);
+		}
+		else if (chdir(cmd->cmds[1]) != 0)
+		{
+			g_exit = 1;
+			return (perror("cd"));
+		}
+		else
+			g_exit = 0;
 	}
 }
-
-int	ft_cd(char **args, t_env *env)
-{
-	int	cd_ret;
-
-	if (!args[1])
-		//return ()
-}*/
