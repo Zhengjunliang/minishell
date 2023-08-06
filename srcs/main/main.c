@@ -27,7 +27,7 @@ void	set_env(t_mini **mini, char **envp)
 		i++;
 	(*mini)->env = ft_calloc(sizeof(char *), (i + 1));
 	i = -1;
-	while (envp[i++])
+	while (envp[++i])
 		(*mini)->env[i] = ft_strdup(envp[i]);
 }
 

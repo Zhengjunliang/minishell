@@ -14,15 +14,16 @@
 
 bool	ft_builtin(t_mini **ms, t_cmd *cmd)
 {
-	(void)ms;
-	if (!ft_strncmp(cmd->cmds[0], "pwd", 4))
+	if (!cmd->cmds[0])
+		return (false);
+	else if (!ft_strncmp(cmd->cmds[0], "pwd", 4))
 		ft_pwd();
 	//else if (!ft_strncmp(cmd->cmds[0], "clear", 6))
 		//ft_clear();
 	//else if (!ft_strncmp(cmd->cmds[0], "cd", 3))
 		//ft_cd(ms, cmd);
-	//else if (!ft_strncmp(cmd->cmds[0], "env", 4))
-		//ft_env(ms);
+	else if (!ft_strncmp(cmd->cmds[0], "env", 4))
+		ft_env(ms);
 	//else if (!ft_strncmp(cmd->cmds[0], "export", 6))
 		//ft_export(ms, cmd);
 	//else if (!ft_strncmp(cmd->cmds[0], "unset", 5))
