@@ -12,12 +12,17 @@
 
 #include "minishell.h"
 
-/*void	mini_exit(t_mini *mini, char **cmd)
+int	ft_exit(t_mini **mini)
 {
-	ft_putstr_fd("exit ", 2);
-	if (cmd[1] && cmd[2])
+	if (!(*mini)->input)
 	{
-		ft_putendl_fd("minishell: exit: too many arguments", 2);
+		printf("exit\n");
+		return (1);
 	}
+	if (!ft_strncmp((*mini)->input, "exit", 4))
+	{
+		printf("exit\n");
+		return (1);
+	}
+	return (0);
 }
-*/

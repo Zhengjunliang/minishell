@@ -53,31 +53,6 @@ static int	is_valid_input(char *s)
 	return (0);
 }
 
-int	check_exit(t_mini **mini)
-{
-	if (!(*mini)->input)
-	{
-		printf("exit\n");
-		return (1);
-	}
-	if (!ft_strncmp((*mini)->input, "exit", 4))
-	{
-		if (!ft_strncmp((*mini)->input, "exit ", 5))
-		{
-			//ft_exit(mini);
-			return (2);
-		}
-		else
-		{
-			printf("exit\n");
-			return (1);
-		}
-		free((*mini)->input);
-	}
-	return (0);
-}
-
-
 int main(int ac, char **av, char **envp)
 {
 	t_mini	*mini;
@@ -94,7 +69,7 @@ int main(int ac, char **av, char **envp)
 		signal(SIGQUIT, SIG_IGN); // Control -"\"
 		mini->hist = true;
 		mini->input = readline(mini->prompt);
-		mini->exit = check_exit(&mini);
+		mini->exit = ft_exit(&mini);
 		if (mini->exit == 1)
 			break ;
 		if (is_valid_input(mini->input))

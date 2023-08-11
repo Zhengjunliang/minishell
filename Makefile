@@ -24,7 +24,8 @@ EXEC	=	exec
 
 MAIN	=	main free signal
 
-UTILS	=	ft_split1 ft_countwords1 ft_subsplit ft_creatlist
+UTILS	=	ft_split1 ft_countwords1 ft_subsplit ft_creatlist \
+			ft_trims ft_expander ft_expander2
 
 SRC 	=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
 			$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \

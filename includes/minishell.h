@@ -33,6 +33,13 @@ typedef struct s_cmd
 	struct s_cmd	*next;	
 }				t_cmd;
 
+typedef struct s_exp {
+	char	**cmds;
+	char	*var;
+	char	*ret;
+	char	*trim;
+}				t_exp;
+
 typedef struct s_mini
 {
 	char			*input;
@@ -63,6 +70,7 @@ bool	ft_builtin(t_mini **ms, t_cmd *cmd);
 void	ft_echo(t_cmd *cmd);
 void	ft_pwd(t_mini **ms);
 void	ft_cd(t_mini **ms, t_cmd *cmd);
+int	ft_exit(t_mini **mini);
 t_cmd	*create_cmdlst(t_list	*lst, t_mini *ms);
 /*
 ** EXEC
@@ -86,9 +94,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 int	ft_countwords1(char *s);
 t_list	*ft_subsplit(char **tab);
 t_list	*ft_createlist(char **tab);
+void	ft_trimlist(t_list	*lst);
+char	*ft_expander(char *line);
 /*
 **SIGNAL
 */
 void	sig_int(int code);
+void	ft_perrex(char *s);
 
 #endif

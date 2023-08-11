@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_expander2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juzheng <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 14:52:37 by juzheng           #+#    #+#             */
-/*   Updated: 2023/07/24 14:52:38 by juzheng          ###   ########.fr       */
+/*   Created: 2023/08/04 16:26:08 by juzheng           #+#    #+#             */
+/*   Updated: 2023/08/04 16:26:08 by juzheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sig_int(int code)
+char	*exit_exp(char *line)
 {
-	(void)code;
-	g_exit = 130;
-	write(STDOUT_FILENO, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
+	int		i;
+	char	*tmp;
 
-void	ft_perrex(char *s)
-{
-	perror(s);
-	g_exit = 1234;
+	i = -1;
+	if (ft_strchr(line, '$'))
+	{
+		while (line[++i])
+		{
+			if (line[i] == '$' && line[i + 1] == '?')
+			{
+				tmp = exit_exp2(line, i);
+				free(line);
+				return (tmp);
+			}
+		}
+	}
+	return (line);
 }
