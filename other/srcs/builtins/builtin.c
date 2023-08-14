@@ -25,9 +25,9 @@ bool	ft_builtin(t_mini **ms, t_list *cmd)
 	/*else if (!ft_strncmp(cmd->head->content, "export", 6))
 		ft_export(ms, cmd);
 	else if (!ft_strncmp(cmd->head->content, "unset", 5))
-		ft_unset(ms, cmd);
+		ft_unset(ms, cmd);*/
 	else if (!ft_strncmp(cmd->head->content, "echo", 4))
-		ft_echo(cmd);*/
+		ft_echo(cmd);
 	else
 		return (false);
 	return (true);

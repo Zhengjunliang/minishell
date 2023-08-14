@@ -1,43 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juzheng <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/22 16:51:43 by juzheng           #+#    #+#             */
-/*   Updated: 2023/07/22 16:51:44 by juzheng          ###   ########.fr       */
+/*   Created: 2023/08/14 18:28:23 by juzheng           #+#    #+#             */
+/*   Updated: 2023/08/14 18:28:24 by juzheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_echo(t_list *cmd)
+int	ft_isalnum(int c)
 {
-	int	flag;
-	int	i;
-	t_elem node;
-
-	node = cmd->head;
-	flag = 0;
-	i = 0;
-	if (node)
-	{
-		while (node)
-		{
-			if (!ft_strncmp(node->content, "-n", 2))
-			{
-				flag = 1;
-				i++;
-			}
-			if (node)
-				printf("%s ", node->content);
-			else
-				printf("%s", node->content);
-			node = node->next;
-		}
-		if (flag == 0)
-			printf("\n");
-	}
-	g_exit = 0;
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	else if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
 }
+

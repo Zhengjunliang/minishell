@@ -16,7 +16,7 @@ void	cmd_builder(t_mini **ms)
 {
 	int		i;
 
-	//ft_readifyouneed(&((*ms)->input), ms);
+	ft_readifyouneed(&((*ms)->input), ms);
 	(*ms)->cmd = ft_split1((*ms)->input);
 	i = -1;
 	while ((*ms)->cmd[++i])

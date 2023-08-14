@@ -77,7 +77,12 @@ t_cmd	*create_cmdlst(t_list	*lst, t_mini *ms);
 */
 void	cmd_builder(t_mini **ms);
 void	exec_cmd(t_mini **ms, t_cmd *cmd_list);
-
+void	ft_count_quotes(char *s, int *dc, int *sc);
+void	ft_search_last_n_scale(char **origin, char c);
+void	ft_freejoin(char **origin, char **line);
+int	ft_sl(const char *s);
+void	ft_readifyouneed(char **origin, t_mini **ms);
+char	*gnl(int fd);
 /*
 ** FREE
 */
@@ -96,6 +101,7 @@ t_list	*ft_subsplit(char **tab);
 t_list	*ft_createlist(char **tab);
 void	ft_trimlist(t_list	*lst);
 char	*ft_expander(char *line);
+char	*exit_exp(char *line);
 /*
 **SIGNAL
 */

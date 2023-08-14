@@ -15,9 +15,9 @@
 char	*ft_expander(char *line)
 {
 	t_exp	*exp;
-	int		ktm;
+	//int		ktm;
 
-	ktm = 0;
+	//ktm = 0;
 	exp = ft_calloc(sizeof(t_exp), 1);
 	line = exit_exp(line);
 	/*if (strchr(line, '$') && !strchr(line, ' '))

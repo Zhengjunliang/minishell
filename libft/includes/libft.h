@@ -34,6 +34,7 @@ void			ft_putendl(char *s);
 
 int	ft_isdigit(int num);
 int	ft_isalpha(int c);
+int	ft_isalnum(int c);
 char			*ft_strdup(const char *s1);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strjoin(char const *s1, char const *s2);
@@ -43,7 +44,7 @@ int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_strlen(const char *str);
 void			*ft_memdel(void *ptr);
 char	**ft_split(char const *s, char c);
-int				get_next_line(int fd, char **line);
+
 char			*ft_itoa(int n);
 
 void	ft_lstadd_front(t_list **lst, t_list *new);
