@@ -20,12 +20,30 @@ void	free_all(t_mini **ms)
 	while ((*ms)->env[++i])
 		free((*ms)->env[i]);
 	i = -1;
-	//while ((*ms)->path[++i])
-	//	free((*ms)->path[i]);
-	//free((*ms)->path);
+	while ((*ms)->path[++i])
+		free((*ms)->path[i]);
+	free((*ms)->path);
 	free((*ms)->prompt);
 	free((*ms)->input);
 	free((*ms)->env);
+	free(*ms);
+}
+
+void	free_for_all2(t_mini **ms)
+{
+	int	i;
+
+	i = -1;
+	while ((*ms)->env[++i])
+		free((*ms)->env[i]);
+	i = -1;
+	while ((*ms)->path[++i])
+		free((*ms)->path[i]);
+	free((*ms)->path);
+	free((*ms)->prompt);
+	free((*ms)->input);
+	free((*ms)->env);
+	free_cmd((*ms)->cmd_list);
 	free(*ms);
 }
 

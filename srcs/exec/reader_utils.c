@@ -42,6 +42,23 @@ void	ft_addnl(char **origin)
 	free(nl);
 }
 
+void	ft_promptpipe(char **origin)
+{
+	char	*line;
+	char	*tmp;
+
+	g_exit = 0;
+	write(1, "pipe> ", 6);
+	line = gnl(0);
+	if (line && *line)
+	{
+		tmp = *origin;
+		*origin = ft_strjoin(tmp, line);
+		free(tmp);
+		free(line);
+	}
+}
+
 void	ft_count_quotes(char *s, int *dc, int *sc)
 {
 	*dc = 0;

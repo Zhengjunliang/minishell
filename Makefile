@@ -20,7 +20,7 @@ LIBFT	=	libft/libft.a
 BUILTINS	=	exit builtin echo pwd env cd \
 				cmdlst
 
-EXEC	=	exec reader_utils reader redirect get_next_line
+EXEC	=	exec reader_utils reader redirect get_next_line executor
 
 MAIN	=	main free signal
 

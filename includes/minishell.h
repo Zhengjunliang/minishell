@@ -21,6 +21,7 @@
 # include <signal.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <stdio.h>
 # include <stdbool.h>
 
@@ -36,6 +37,8 @@ typedef struct s_cmd
 {
 	char			**cmds;
 	char			*cmd;
+	int				in_fd;
+	int				out_fd;
 	struct s_cmd	*next;	
 }				t_cmd;
 
@@ -55,8 +58,12 @@ typedef struct s_mini
 	char		**path;
 	char			*prompt;
 	char			**cmd;
+	pid_t		pid;
 	bool			hist;
-	int				pipe;
+	int			fd;
+	int			stdin_fd;
+	int			stdout_fd;
+	int			pipe;
 	t_cmd			*cmd_list;
 	t_list			*list;
 	int				exit;
@@ -84,6 +91,8 @@ void	ft_pwd(t_mini **ms);
 void	ft_cd(t_mini **ms, t_cmd *cmd);
 int	ft_exit(t_mini **mini);
 t_cmd	*create_cmdlst(t_list	*lst, t_mini *ms);
+void	open_redir(t_cmd *cmd);
+void	close_redir(t_mini **ms, t_cmd *cmd);
 /*
 ** EXEC
 */
@@ -96,10 +105,13 @@ int	ft_sl(const char *s);
 void	ft_readifyouneed(char **origin, t_mini **ms);
 char	*gnl(int fd);
 void	ft_addnl(char **origin);
+void	ft_promptpipe(char **origin);
+void	executor(t_mini **ms, t_cmd *cmd);
 /*
 ** FREE
 */
 void	free_all(t_mini **ms);
+void	free_for_all2(t_mini **ms);
 void	free_cmd(t_cmd *cmd);
 
 /*
@@ -113,10 +125,13 @@ int	ft_countwords1(char *s);
 void	ft_trimlist(t_list	*lst);
 char	*ft_expander(char *line);
 char	*exit_exp(char *line);
+int	content_is(t_list *lst, const char *s);
+void	lst_freecont_n_skip(t_list **lst);
 /*
 **SIGNAL
 */
 void	sig_int(int code);
 void	ft_perrex(char *s);
+void	prnt_ctrl(int sig);
 
 #endif

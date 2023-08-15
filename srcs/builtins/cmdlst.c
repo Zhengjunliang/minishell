@@ -73,13 +73,21 @@ void	ft_cmd_addback(t_cmd **cmd, t_cmd *new)
 
 static int	ft_cmdslen(t_list *lst)
 {
+	char	*str;
 	int		i;
 
 	i = 0;
-	while (lst)
+	if (lst)
+		str = (char *)(lst->content);
+	while (lst && ft_strncmp(str, "|", ft_sl(str))
+		&& ft_strncmp(str, "<", ft_sl(str))
+		&& ft_strncmp(str, ">", ft_sl(str))
+		&& ft_strncmp(str, ">>", ft_sl(str)))
 	{
 		i++;
 		lst = lst->next;
+		if (lst)
+			str = (char *)(lst->content);
 	}
 	return (i);
 }
@@ -121,6 +129,8 @@ t_cmd	*ft_cmdnew(t_list **lst, char **path)
 		*lst = (*lst)->next;
 	}
 	cmdn->cmd = path_search(path, (cmdn->cmds)[0]);
+	cmdn->in_fd = -1;
+	cmdn->out_fd = -1;
 	cmdn->next = NULL;
 	return (cmdn);
 }
@@ -128,11 +138,57 @@ t_cmd	*ft_cmdnew(t_list **lst, char **path)
 void	init_cmdlst(t_cmd **cmdlst, t_cmd **head, t_list **lst, t_mini *ms)
 {
 	*cmdlst = NULL;
-	/*if (!(content_is(*lst, "|") || content_is(*lst, "<")
+	if (!(content_is(*lst, "|") || content_is(*lst, "<")
 			|| content_is(*lst, "<<") || content_is(*lst, ">")
-			|| content_is(*lst, ">>")))*/
-	*cmdlst = ft_cmdnew(lst, ms->path);
+			|| content_is(*lst, ">>")))
+		*cmdlst = ft_cmdnew(lst, ms->path);
 	*head = *cmdlst;
+}
+
+static int	r_input(t_cmd *cmdlst, t_list **lst)
+{
+	lst_freecont_n_skip(lst);
+	if (!(*lst))
+		return (1);
+	cmdlst->in_fd = open((char *)((*lst)->content), O_RDONLY);
+	if (cmdlst->in_fd < 0)
+		ft_perrex(cmdlst->cmds[0]);
+	lst_freecont_n_skip(lst);
+	return (0);
+}
+
+/*static void	r_heredoc(t_cmd *cmdlst, t_list **lst)
+{
+	lst_freecont_n_skip(lst);
+	cmdlst->in_fd = open(HERED, O_RDONLY);
+	if (cmdlst->in_fd < 0)
+		ft_perrex(cmdlst->cmds[0]);
+}*/
+
+static int	r_output(t_cmd *cmdlst, t_list **lst)
+{
+	lst_freecont_n_skip(lst);
+	if (!(*lst))
+		return (1);
+	cmdlst->out_fd = open((char *)((*lst)->content),
+			O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	if (cmdlst->out_fd < 0)
+		ft_perrex(cmdlst->cmds[0]);
+	lst_freecont_n_skip(lst);
+	return (0);
+}
+
+static int	r_append(t_cmd *cmdlst, t_list **lst)
+{
+	lst_freecont_n_skip(lst);
+	if (!(*lst))
+		return (1);
+	cmdlst->out_fd = open((char *)((*lst)->content),
+			O_WRONLY | O_CREAT | O_APPEND, 0666);
+	if (cmdlst->out_fd < 0)
+		ft_perrex(cmdlst->cmds[0]);
+	lst_freecont_n_skip(lst);
+	return (0);
 }
 
 t_cmd	*create_cmdlst(t_list	*lst, t_mini *ms)
@@ -145,7 +201,18 @@ t_cmd	*create_cmdlst(t_list	*lst, t_mini *ms)
 	init_cmdlst(&cmdlst, &head, &lst, ms);
 	while (lst && cmdlst)
 	{
-		ft_cmd_addback(&cmdlst, ft_cmdnew(&lst, ms->path));
+		if (content_is(lst, "|"))
+			lst_freecont_n_skip(&lst);
+		else if (content_is(lst, "<"))
+			r_input(cmdlst, &lst);
+		//else if (content_is(lst, "<<"))
+		//	r_heredoc(cmdlst, &lst);
+		else if (content_is(lst, ">"))
+			r_output(cmdlst, &lst);
+		else if (content_is(lst, ">>"))
+			r_append(cmdlst, &lst);
+		else
+			ft_cmd_addback(&cmdlst, ft_cmdnew(&lst, ms->path));
 		cmdlst = ft_cmdlast(cmdlst);
 	}
 	clc_freelist(head, &lsthead);

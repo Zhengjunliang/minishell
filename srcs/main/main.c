@@ -37,6 +37,8 @@ void	init_mini(t_mini **mini, char **envp)
 	*mini = ft_calloc(sizeof(t_mini), 1);
 	(*mini)->prompt = ft_strjoin("\033[0;36m", "minishell");
 	(*mini)->prompt = ft_strjoin2((*mini)->prompt, "$ \033[0;37m");
+	(*mini)->stdin_fd = dup(STDIN_FILENO);
+	(*mini)->stdout_fd = dup(STDOUT_FILENO);
 	set_env(mini, envp);
 }
 

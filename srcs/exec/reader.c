@@ -123,7 +123,7 @@ void	ft_readifyouneed(char **origin, t_mini **ms)
 			sep = NULL;
 		ft_heredoc(origin, sep, sc);
 		(*ms)->hist = false;
-	}
+	}*/
 	else if (origin[0][ft_strlen(*origin) - 1] == '|')
-		ft_promptpipe(origin);*/
+		ft_promptpipe(origin);
 }

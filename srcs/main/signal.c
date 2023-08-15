@@ -27,3 +27,9 @@ void	ft_perrex(char *s)
 	perror(s);
 	g_exit = 1234;
 }
+
+void	prnt_ctrl(int sig)
+{
+	(void)sig;
+	write(STDOUT_FILENO, "\n", 1);
+}
