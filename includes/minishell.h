@@ -26,6 +26,12 @@
 
 extern int	g_exit;
 
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}				t_list;
+
 typedef struct s_cmd
 {
 	char			**cmds;
@@ -64,6 +70,12 @@ void	ft_export(t_mini **ms, t_cmd *cmd);
 void	ft_unset(t_mini **ms, t_cmd *cmd);
 
 /*
+** LEXER
+*/
+void	ft_lstadd_front(t_list **lst, t_list *new);
+t_list	*ft_lstnew(void *content);
+t_list	*lexer(char **line);
+/*
 ** BUILTINS
 */
 bool	ft_builtin(t_mini **ms, t_cmd *cmd);
@@ -83,6 +95,7 @@ void	ft_freejoin(char **origin, char **line);
 int	ft_sl(const char *s);
 void	ft_readifyouneed(char **origin, t_mini **ms);
 char	*gnl(int fd);
+void	ft_addnl(char **origin);
 /*
 ** FREE
 */
@@ -97,8 +110,6 @@ char	**ft_split1(char *s);
 void	ft_close_quote(char *s, int *i, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int	ft_countwords1(char *s);
-t_list	*ft_subsplit(char **tab);
-t_list	*ft_createlist(char **tab);
 void	ft_trimlist(t_list	*lst);
 char	*ft_expander(char *line);
 char	*exit_exp(char *line);

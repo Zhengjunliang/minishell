@@ -66,16 +66,37 @@ void	ft_reader(char **origin, char *prompt, char *c)
 	}
 }
 
+static void	ft_search_first(char **origin)
+{
+	int	i;
+
+	i = 0;
+	while (*origin[i])
+	{
+		if (*origin[i] == '\'')
+		{
+			ft_reader(origin, "quote> ", "\'");
+			break ;
+		}
+		else if (*origin[i] == '\"')
+		{
+			ft_reader(origin, "dquote> ", "\"");
+			break ;
+		}
+		i++;
+	}
+}
+
 static int	handle_quotes(int dc, int sc, char **origin)
 {
-	/*if ((dc && dc % 2) || (sc && sc % 2))
-		ft_addnl(origin);*/
+	if ((dc && dc % 2) || (sc && sc % 2))
+		ft_addnl(origin);
 	if (dc && dc % 2 != 0 && !(sc % 2))
 		ft_reader(origin, "dquote> ", "\"");
 	else if (sc && sc % 2 != 0 && !(dc % 2))
 		ft_reader(origin, "quote> ", "\'");
-	//else if (dc && sc && (sc % 2) && (dc % 2))
-	//	ft_search_first(origin);
+	else if (dc && sc && (sc % 2) && (dc % 2))
+		ft_search_first(origin);
 	else
 		return (0);
 	return (1);

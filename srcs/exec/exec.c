@@ -21,7 +21,7 @@ void	cmd_builder(t_mini **ms)
 	i = -1;
 	while ((*ms)->cmd[++i])
 		(*ms)->cmd[i] = ft_expander((*ms)->cmd[i]);
-	(*ms)->list = ft_subsplit((*ms)->cmd);
+	(*ms)->list = lexer((*ms)->cmd);
 	ft_trimlist((*ms)->list);  //cancellato i quotes ''""
 	(*ms)->cmd_list = create_cmdlst((*ms)->list, *ms);
 	if ((*ms)->cmd_list == NULL && (*ms)->hist)

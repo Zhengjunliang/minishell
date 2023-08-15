@@ -20,12 +20,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}				t_list;
-
 void			*ft_calloc(size_t nmemb, size_t size);
 void			ft_bzero(void *s, size_t n);
 void			ft_putstr_fd(char *s, int fd);
@@ -47,6 +41,4 @@ char	**ft_split(char const *s, char c);
 
 char			*ft_itoa(int n);
 
-void	ft_lstadd_front(t_list **lst, t_list *new);
-t_list	*ft_lstnew(void *content);
 #endif

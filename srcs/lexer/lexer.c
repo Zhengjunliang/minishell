@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_createlist.c                                    :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juzheng <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lgaibazz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/04 16:26:08 by juzheng           #+#    #+#             */
-/*   Updated: 2023/08/04 16:26:08 by juzheng          ###   ########.fr       */
+/*   Created: 2023/08/14 15:20:47 by lgaibazz          #+#    #+#             */
+/*   Updated: 2023/08/14 15:20:48 by lgaibazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*static t_list	*ft_tabtolist(char **tab)
+static t_list	*ft_tabtolist(char **tab)
 {
 	int		i;
 	t_list	*lst;
@@ -42,4 +42,15 @@ t_list	*ft_createlist(char **tab)
 	if (tab)
 		free(tab);
 	return (lst);
-}*/
+}
+
+//la funzione lexer effettiva, riceve in input la linea ritornata da readline e restituisce una lista che la rappresenti nel formato dei token
+t_list	*lexer(char **line)
+{
+	t_list	*tokens;
+
+	tokens = ft_createlist(line);
+	if (!tokens)
+		return (NULL);
+	return (tokens);
+}

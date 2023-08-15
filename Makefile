@@ -24,12 +24,15 @@ EXEC	=	exec reader_utils reader redirect get_next_line
 
 MAIN	=	main free signal
 
+LEXER	=	lexer list lexer_utils
+
 UTILS	=	ft_split1 ft_countwords1 ft_subsplit ft_creatlist \
 			ft_trims ft_expander ft_expander2
 
 SRC 	=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
 			$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
 			$(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
+			$(addsuffix .c, $(addprefix srcs/lexer/, $(LEXER))) \
 			$(addsuffix .c, $(addprefix srcs/utils/, $(UTILS))) \
 			$(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING)))
 

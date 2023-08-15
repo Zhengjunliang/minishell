@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalphanum.c                                    :+:      :+:    :+:   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgaibazz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 16:07:46 by lgaibazz          #+#    #+#             */
-/*   Updated: 2023/08/14 16:07:47 by lgaibazz         ###   ########.fr       */
+/*   Created: 2023/08/14 15:21:06 by lgaibazz          #+#    #+#             */
+/*   Updated: 2023/08/14 15:21:07 by lgaibazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_isalphanum(int c)
+//ritorna 1 se il char argomento e' uno "spazio"
+int	ft_isspace(char c)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'))
+	if (c == ' ' || c == '\t' || c == '\v'
+		|| c == '\r' || c == '\f' || c == '\n')
 		return (1);
-	else
-		return (0);
+	return (0);
 }
+
+//ritorna 1 se il char argomento e' uno "spazio" o un meta-character (o NULL)
+int	in_charset(char c)
+{
+	return (c == '\'' || c == '\"' || c == '<' || c == '>' || c == '|'
+		|| c == '$' || ft_isspace(c) || c == '\0');
+}
+

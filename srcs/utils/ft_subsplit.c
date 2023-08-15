@@ -23,13 +23,3 @@ int	ft_sl(const char *s)
 		i++;
 	return (i);
 }
-
-t_list	*ft_subsplit(char **tab)
-{
-	t_list	*args;
-
-	args = ft_createlist(tab);
-	if (!args)
-		return (NULL);
-	return (args);
-}

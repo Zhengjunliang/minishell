@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juzheng <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lgaibazz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 15:19:30 by juzheng           #+#    #+#             */
-/*   Updated: 2023/07/24 15:19:33 by juzheng          ###   ########.fr       */
+/*   Created: 2023/08/14 15:21:15 by lgaibazz          #+#    #+#             */
+/*   Updated: 2023/08/14 15:21:16 by lgaibazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-/*t_list	*ft_lstnew(void *content)
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	new->next = *lst;
+	*lst = new;
+}
+
+t_list	*ft_lstnew(void *content)
 {
 	t_list	*new;
 
@@ -22,4 +28,4 @@
 	new->content = content;
 	new->next = NULL;
 	return (new);
-}*/
+}

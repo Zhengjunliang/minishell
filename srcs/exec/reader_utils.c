@@ -26,6 +26,22 @@ void	ft_freejoin(char **origin, char **line)
 		free(*line);
 }
 
+void	ft_addnl(char **origin)
+{
+	char	*tmp;
+	char	*nl;
+
+	nl = malloc(2);
+	if (!nl)
+		return ;
+	nl[0] = '\n';
+	nl[1] = '\0';
+	tmp = *origin;
+	*origin = ft_strjoin(*origin, nl);
+	free(tmp);
+	free(nl);
+}
+
 void	ft_count_quotes(char *s, int *dc, int *sc)
 {
 	*dc = 0;
