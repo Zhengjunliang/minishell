@@ -22,7 +22,7 @@ BUILTINS	=	exit builtin echo pwd env cd \
 
 EXEC	=	exec reader_utils reader redirect get_next_line executor
 
-MAIN	=	main free signal
+MAIN	=	main free signal init
 
 LEXER	=	lexer list lexer_utils
 

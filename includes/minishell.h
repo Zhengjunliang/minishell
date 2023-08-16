@@ -73,6 +73,12 @@ typedef struct s_mini
 }				t_mini;
 
 /*
+** INIT
+*/
+void	set_env(t_mini **mini, char **envp);
+void	init(t_mini **mini, char **envp);
+
+/*
 ** ENV
 */
 void	ft_env(t_mini **mini);
