@@ -107,3 +107,9 @@ char	*exit_exp(char *line)
 	}
 	return (line);
 }
+
+char	*free_and_replace(char	*line, char	*dup)
+{
+	free(line);
+	return (dup);
+}

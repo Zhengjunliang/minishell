@@ -47,7 +47,7 @@ void	child_pipe(t_mini **ms, t_cmd *cmd_list, int *pipefd)
 	//}
 	//close(pipefd[1]);
 	if (ft_builtin(ms, cmd_list) == false)
-		printf("sd");//executor(ms, cmd_list);
+		executor(ms, cmd_list);
 	free_for_all2(ms);
 	exit(EXIT_SUCCESS);
 }
@@ -71,6 +71,32 @@ void	child_pipe(t_mini **ms, t_cmd *cmd_list, int *pipefd)
 	exec_cmd(ms, cmd_list->next);
 }*/
 
+void	single_cmd(t_mini **ms, t_cmd *cmd_list)
+{
+	int	status;
+
+	status = 0;
+	(*ms)->pid = fork();
+	if ((*ms)->pid == -1)
+		return (perror("fork"));
+	else if (!(*ms)->pid)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		executor(ms, cmd_list);
+	}
+	else
+	{
+		signal(SIGINT, prnt_ctrl);
+		signal(SIGQUIT, prnt_ctrl);
+		waitpid((*ms)->pid, &status, 0);
+		if (WIFEXITED(status))
+			g_exit = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			g_exit = WTERMSIG(status) + 128;
+	}
+}
+
 void	exec_cmd(t_mini **ms, t_cmd *cmd_list)
 {
 	int			pipefd[2];
@@ -90,7 +116,7 @@ void	exec_cmd(t_mini **ms, t_cmd *cmd_list)
 			//parent_pipe(ms, cmd_list, pipefd);
 	}
 	else if (ft_builtin(ms, cmd_list) == false)
-		printf("Hello");
+		single_cmd(ms, cmd_list);
 	(*ms)->pipe = 0;
 	//dup2((*ms)->stdin_fd, STDIN_FILENO);
 }

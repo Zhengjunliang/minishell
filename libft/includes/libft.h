@@ -25,7 +25,7 @@ void			ft_bzero(void *s, size_t n);
 void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putendl(char *s);
-
+char	*ft_strtrim(char const *s1, char const *set);
 int	ft_isdigit(int num);
 int	ft_isalpha(int c);
 int	ft_isalnum(int c);

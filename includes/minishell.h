@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 # include "../libft/includes/libft.h"
-# include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
@@ -113,6 +112,7 @@ void	executor(t_mini **ms, t_cmd *cmd);
 void	free_all(t_mini **ms);
 void	free_for_all2(t_mini **ms);
 void	free_cmd(t_cmd *cmd);
+char	*free_and_replace(char	*line, char	*dup);
 
 /*
 **UTILS
