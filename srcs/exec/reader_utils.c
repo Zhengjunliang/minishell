@@ -12,6 +12,29 @@
 
 #include "minishell.h"
 
+void	ft_putinhdoc_n_free(char *line)
+{
+	int		fd;
+	char	*tmp;
+
+	fd = open(HERED, O_RDWR | O_CREAT | O_APPEND, 0666);
+	tmp = ft_strtrim(line, "\n");
+	if (line && *line)
+		free(line);
+	if (ft_strchr(tmp, '\"'))
+	{
+		line = ft_expander(tmp);
+		line = add_dapex(line, ft_strtrim(line, "\""));
+	}
+	else
+		line = ft_expander(tmp);
+	line = ft_strjoin2(line, "\n");
+	write(fd, line, ft_sl(line));
+	close(fd);
+	if (line && *line)
+		free(line);
+}
+
 void	ft_freejoin(char **origin, char **line)
 {
 	char	*tmp;
@@ -100,4 +123,71 @@ void	ft_search_last_n_scale(char **origin, char c)
 		free(*origin);
 		*origin = tmp;
 	}
+}
+
+char	*ft_sp(char *s)
+{
+	int	i;
+
+	if (!s | !(*s))
+		return (NULL);
+	i = 0;
+	while (s[i] && s[i] != 32)
+		i++;
+	while (s[i] == 32)
+		i++;
+	if (s[i])
+		return (&s[i]);
+	return (NULL);
+}
+
+int	ft_lts(char *s)
+{
+	int	i;
+
+	if (!s || !(*s))
+		return (0);
+	i = 0;
+	while (s[i] && s[i] != 32)
+		i++;
+	return (i);
+}
+
+int	ft_splen(char *s)
+{
+	int	i;
+
+	if (!s || !(*s))
+		return (0);
+	i = 0;
+	while (s[i] && s[i] == 32)
+		i++;
+	return (i);
+}
+
+void	ft_heredoc(char **origin, char *sep, int till_sep)
+{
+	char	*start;
+	char	*end;
+
+	if (!sep || !(*sep))
+		return ((void)(printf("heredoc: wrog syntax\n")));
+	start = ft_substr(*origin, 0, till_sep + 2);
+	end = ft_sp(*origin + till_sep + 2 + ft_strlen(sep));
+	if (end)
+		end = ft_strdup(ft_sp(*origin + till_sep + 2 + ft_strlen(sep)));
+	ft_reader(&start, "heredoc> ", sep);
+	free(*origin);
+	if (end)
+	{
+		*origin = end;
+		end = ft_strjoin(" ", end);
+		free(*origin);
+		*origin = ft_strjoin(start, end);
+		free(end);
+		free(start);
+	}
+	else
+		*origin = start;
+	free(sep);
 }

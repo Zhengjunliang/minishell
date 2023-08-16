@@ -24,6 +24,10 @@
 # include <stdio.h>
 # include <stdbool.h>
 
+# ifndef HERED
+#  define HERED "Src/.obj/.heredoc"
+# endif
+
 extern int	g_exit;
 
 typedef struct s_list
@@ -92,6 +96,7 @@ int	ft_exit(t_mini **mini);
 t_cmd	*create_cmdlst(t_list	*lst, t_mini *ms);
 void	open_redir(t_cmd *cmd);
 void	close_redir(t_mini **ms, t_cmd *cmd);
+void	ft_reader(char **origin, char *prompt, char *c);
 /*
 ** EXEC
 */
@@ -127,6 +132,10 @@ char	*ft_expander(char *line);
 char	*exit_exp(char *line);
 int	content_is(t_list *lst, const char *s);
 void	lst_freecont_n_skip(t_list **lst);
+char	*ft_strjoin3(char *s1, char *s2, int flag);
+char	*add_dapex(char	*line, char	*trim);
+void	ft_putinhdoc_n_free(char *line);
+int	is_in_quotes(char *origin, char *ob);
 /*
 **SIGNAL
 */
@@ -134,4 +143,7 @@ void	sig_int(int code);
 void	ft_perrex(char *s);
 void	prnt_ctrl(int sig);
 
+int	ft_lts(char *s);
+int	ft_splen(char *s);
+void	ft_heredoc(char **origin, char *sep, int till_sep);
 #endif

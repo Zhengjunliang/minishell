@@ -26,8 +26,8 @@ bool	check_builtin(t_cmd *cmd)
 
 bool	ft_builtin(t_mini **ms, t_cmd *cmd)
 {
-	//if ((cmd->out_fd != -1 || cmd->in_fd != -1) && check_builtin(cmd) == true)
-		//open_redir(cmd);
+	if ((cmd->out_fd != -1 || cmd->in_fd != -1) && check_builtin(cmd) == true)
+		open_redir(cmd);
 	if (!cmd->cmds[0])
 		return (false);
 	else if (!ft_strncmp(cmd->cmds[0], "pwd", 4))
@@ -44,6 +44,6 @@ bool	ft_builtin(t_mini **ms, t_cmd *cmd)
 		ft_echo(cmd);
 	else
 		return (false);
-	//close_redir(ms, cmd);
+	close_redir(ms, cmd);
 	return (true);
 }

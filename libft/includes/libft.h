@@ -40,5 +40,6 @@ void			*ft_memdel(void *ptr);
 char	**ft_split(char const *s, char c);
 
 char			*ft_itoa(int n);
+char	*ft_strnstr(const char *str, const char *to_find, size_t len);
 
 #endif

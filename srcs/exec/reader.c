@@ -56,8 +56,8 @@ void	ft_reader(char **origin, char *prompt, char *c)
 		{
 			if (ft_endread(c, &line, origin))
 				break ;
-			//if (!ft_strncmp("heredoc> ", prompt, ft_sl(prompt)))
-			//	ft_putinhdoc_n_free(line);
+			if (!ft_strncmp("heredoc> ", prompt, ft_sl(prompt)))
+				ft_putinhdoc_n_free(line);
 			else
 				ft_freejoin(origin, &line);
 		}
@@ -106,12 +106,12 @@ void	ft_readifyouneed(char **origin, t_mini **ms)
 {
 	int		dc;
 	int		sc;
-	//char	*sep;
+	char	*sep;
 	(void)ms;
 	ft_count_quotes(*origin, &dc, &sc);
 	if (handle_quotes(dc, sc, origin))
 		return ;
-	/*else if (ft_strnstr(*origin, "<<", ft_sl(*origin))
+	else if (ft_strnstr(*origin, "<<", ft_sl(*origin))
 		&& !is_in_quotes(*origin, "<<"))
 	{
 		sc = ft_strnstr(*origin, "<<", ft_strlen(*origin)) - *origin;
@@ -123,7 +123,7 @@ void	ft_readifyouneed(char **origin, t_mini **ms)
 			sep = NULL;
 		ft_heredoc(origin, sep, sc);
 		(*ms)->hist = false;
-	}*/
+	}
 	else if (origin[0][ft_strlen(*origin) - 1] == '|')
 		ft_promptpipe(origin);
 }

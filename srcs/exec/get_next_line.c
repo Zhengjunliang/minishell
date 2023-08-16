@@ -63,3 +63,31 @@ char	*gnl(int fd)
 	buf = ft_addone(buf, i + 1);
 	return (buf);
 }
+
+char	*ft_strjoin3(char *s1, char *s2, int flag)
+{
+	char	*str;
+	int		len;
+	int		i;
+	int		x;
+
+	i = 0;
+	x = 0;
+	len = ft_strlen(s1) + ft_strlen(s2);
+	str = ft_calloc(sizeof(char), len + 1);
+	if (!str || !s1 || !s2)
+		return (NULL);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[x])
+		str[i++] = s2[x++];
+	str[i] = '\0';
+	if (flag == 0)
+		free (s1);
+	else if (flag == 1)
+		free (s2);
+	return (str);
+}

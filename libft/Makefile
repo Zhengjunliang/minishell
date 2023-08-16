@@ -19,7 +19,7 @@ FILES	=	ft_putstr_fd ft_strdup ft_memdel ft_putendl_fd \
 			ft_strchr ft_strcmp ft_putendl ft_strjoin ft_itoa \
 			ft_calloc ft_bzero ft_strlen ft_strncmp \
 			ft_split ft_isdigit ft_isalpha \
-			ft_isalnum ft_strtrim
+			ft_isalnum ft_strtrim ft_strnstr
 
 SRCS	=	$(addsuffix .c, $(addprefix srcs/, $(FILES)))
 

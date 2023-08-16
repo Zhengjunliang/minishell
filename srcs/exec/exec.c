@@ -16,6 +16,8 @@ void	cmd_builder(t_mini **ms)
 {
 	int		i;
 
+	if (!access(HERED, F_OK))
+		unlink(HERED);
 	ft_readifyouneed(&((*ms)->input), ms);
 	(*ms)->cmd = ft_split1((*ms)->input);
 	i = -1;
@@ -36,23 +38,22 @@ void	cmd_builder(t_mini **ms)
 
 void	child_pipe(t_mini **ms, t_cmd *cmd_list, int *pipefd)
 {
-	(void)pipefd;
-	//signal(SIGINT, SIG_DFL);
-	//signal(SIGQUIT, SIG_DFL);
-	//close(pipefd[0]);
-	//if (dup2(pipefd[1], STDOUT_FILENO) == -1)
-	//{
-	//	perror("dup2");
-	//	exit(EXIT_FAILURE);
-	//}
-	//close(pipefd[1]);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	close(pipefd[0]);
+	if (dup2(pipefd[1], STDOUT_FILENO) == -1)
+	{
+		perror("dup2");
+		exit(EXIT_FAILURE);
+	}
+	close(pipefd[1]);
 	if (ft_builtin(ms, cmd_list) == false)
 		executor(ms, cmd_list);
 	free_for_all2(ms);
 	exit(EXIT_SUCCESS);
 }
 
-/*void	parent_pipe(t_mini **ms, t_cmd *cmd_list, int *pipefd)
+void	parent_pipe(t_mini **ms, t_cmd *cmd_list, int *pipefd)
 {
 	int	status;
 
@@ -69,7 +70,7 @@ void	child_pipe(t_mini **ms, t_cmd *cmd_list, int *pipefd)
 	else if (WIFSIGNALED(status))
 		g_exit = WTERMSIG(status) + 128;
 	exec_cmd(ms, cmd_list->next);
-}*/
+}
 
 void	single_cmd(t_mini **ms, t_cmd *cmd_list)
 {
@@ -112,11 +113,11 @@ void	exec_cmd(t_mini **ms, t_cmd *cmd_list)
 			return (perror("fork"));
 		else if (!(*ms)->pid)
 			child_pipe(ms, cmd_list, pipefd);
-		//else
-			//parent_pipe(ms, cmd_list, pipefd);
+		else
+			parent_pipe(ms, cmd_list, pipefd);
 	}
 	else if (ft_builtin(ms, cmd_list) == false)
 		single_cmd(ms, cmd_list);
 	(*ms)->pipe = 0;
-	//dup2((*ms)->stdin_fd, STDIN_FILENO);
+	dup2((*ms)->stdin_fd, STDIN_FILENO);
 }
