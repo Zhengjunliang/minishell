@@ -12,6 +12,28 @@
 
 #include "minishell.h"
 
+char	*ft_getenv(t_mini **ms, char *line)
+{
+	int		i;
+	int		j;
+	int		flag;
+
+	i = -1;
+	while ((*ms)->env[++i])
+	{
+		flag = 1;
+		j = -1;
+		while ((*ms)->env[i][++j] && line[j] && flag)
+		{
+			if ((*ms)->env[i][j] != line[j])
+				flag = 0;
+		}
+		if ((*ms)->env[i][j] == '=' && line[j] == '\0' && (*ms)->env[i][j + 1])
+			return (&((*ms)->env[i][++j]));
+	}
+	return (NULL);
+}
+
 int	apex_exp(t_exp **exp, char *line)
 {
 	int		i;
@@ -98,7 +120,7 @@ char	*multi_exp(t_exp **exp, char *line)
 	return (ret);
 }
 
-char	*ft_expander(char *line)
+char	*ft_expander(t_mini **ms, char *line)
 {
 	t_exp	*exp;
 	int		ktm;
@@ -109,8 +131,8 @@ char	*ft_expander(char *line)
 	if (ft_chr(line, '$') && !ft_chr(line, ' '))
 	{
 		exp->trim = ft_strtrim(line, "$\"");
-		if (getenv(exp->trim))
-			line = free_and_replace(line, ft_strdup(getenv(exp->trim)));
+		if (ft_getenv(ms, exp->trim))
+			line = free_and_replace(line, ft_strdup(ft_getenv(ms, exp->trim)));
 		else if (ft_chr(line, '\"') && ft_chr(line, '$') && ft_chr(line, '\''))
 		{
 			ktm = apex_exp(&exp, line);

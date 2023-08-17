@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	ft_putinhdoc_n_free(char *line)
+void	ft_putinhdoc_n_free(t_mini **ms, char *line)
 {
 	int		fd;
 	char	*tmp;
@@ -23,11 +23,11 @@ void	ft_putinhdoc_n_free(char *line)
 		free(line);
 	if (ft_chr(tmp, '\"'))
 	{
-		line = ft_expander(tmp);
+		line = ft_expander(ms, tmp);
 		line = add_dapex(line, ft_strtrim(line, "\""));
 	}
 	else
-		line = ft_expander(tmp);
+		line = ft_expander(ms, tmp);
 	line = ft_strjoin2(line, "\n");
 	write(fd, line, ft_sl(line));
 	close(fd);

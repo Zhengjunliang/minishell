@@ -68,7 +68,7 @@ int	ft_splen(char *s)
 	return (i);
 }
 
-void	ft_heredoc(char **origin, char *sep, int till_sep)
+void	ft_heredoc(t_mini **ms, char **origin, char *sep, int till_sep)
 {
 	char	*start;
 	char	*end;
@@ -79,7 +79,7 @@ void	ft_heredoc(char **origin, char *sep, int till_sep)
 	end = ft_sp(*origin + till_sep + 2 + ft_strlen(sep));
 	if (end)
 		end = ft_strdup(ft_sp(*origin + till_sep + 2 + ft_strlen(sep)));
-	ft_reader(&start, "heredoc> ", sep);
+	ft_reader(ms, &start, "heredoc> ", sep);
 	free(*origin);
 	if (end)
 	{

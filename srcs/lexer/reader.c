@@ -41,7 +41,7 @@ static int	ft_endread(char *c, char **line, char **origin)
 	return (a);
 }
 
-void	ft_reader(char **origin, char *prompt, char *c)
+void	ft_reader(t_mini **ms, char **origin, char *prompt, char *c)
 {
 	char	*line;
 
@@ -57,7 +57,7 @@ void	ft_reader(char **origin, char *prompt, char *c)
 			if (ft_endread(c, &line, origin))
 				break ;
 			if (!ft_strncmp("heredoc> ", prompt, ft_sl(prompt)))
-				ft_putinhdoc_n_free(line);
+				ft_putinhdoc_n_free(ms, line);
 			else
 				ft_freejoin(origin, &line);
 		}
@@ -66,7 +66,7 @@ void	ft_reader(char **origin, char *prompt, char *c)
 	}
 }
 
-static void	ft_search_first(char **origin)
+static void	ft_search_first(t_mini **ms, char **origin)
 {
 	int	i;
 
@@ -75,28 +75,28 @@ static void	ft_search_first(char **origin)
 	{
 		if (*origin[i] == '\'')
 		{
-			ft_reader(origin, "quote> ", "\'");
+			ft_reader(ms, origin, "quote> ", "\'");
 			break ;
 		}
 		else if (*origin[i] == '\"')
 		{
-			ft_reader(origin, "dquote> ", "\"");
+			ft_reader(ms, origin, "dquote> ", "\"");
 			break ;
 		}
 		i++;
 	}
 }
 
-static int	handle_quotes(int dc, int sc, char **origin)
+static int	handle_quotes(t_mini **ms, int dc, int sc, char **origin)
 {
 	if ((dc && dc % 2) || (sc && sc % 2))
 		ft_addnl(origin);
 	if (dc && dc % 2 != 0 && !(sc % 2))
-		ft_reader(origin, "dquote> ", "\"");
+		ft_reader(ms, origin, "dquote> ", "\"");
 	else if (sc && sc % 2 != 0 && !(dc % 2))
-		ft_reader(origin, "quote> ", "\'");
+		ft_reader(ms, origin, "quote> ", "\'");
 	else if (dc && sc && (sc % 2) && (dc % 2))
-		ft_search_first(origin);
+		ft_search_first(ms, origin);
 	else
 		return (0);
 	return (1);
@@ -109,7 +109,7 @@ void	read_input(char **origin, t_mini **ms)
 	char	*sep;
 
 	ft_count_quotes(*origin, &dc, &sc);
-	if (handle_quotes(dc, sc, origin))
+	if (handle_quotes(ms, dc, sc, origin))
 		return ;
 	else if (ft_strnstr(*origin, "<<", ft_sl(*origin))
 		&& !is_in_quotes(*origin, "<<"))
@@ -121,7 +121,7 @@ void	read_input(char **origin, t_mini **ms)
 							+ ft_splen(&(origin[0][sc + 2]))])));
 		else
 			sep = NULL;
-		ft_heredoc(origin, sep, sc);
+		ft_heredoc(ms, origin, sep, sc);
 		(*ms)->hist = false;
 	}
 	else if (origin[0][ft_strlen(*origin) - 1] == '|')

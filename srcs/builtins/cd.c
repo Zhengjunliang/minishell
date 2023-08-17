@@ -19,7 +19,7 @@ void	ft_cd(t_mini **ms, t_cmd *cmd)
 		if (!cmd->cmds[1])
 		{
 			g_exit = 0;
-			chdir(getenv("HOME"));
+			chdir(ft_getenv(ms, "HOME"));
 		}
 		else if (cmd->cmds[2])
 		{

@@ -117,10 +117,11 @@ int		ft_sl(const char *s);
 int		is_in_quotes(char *origin, char *ob);
 int		ft_lts(char *s);
 int		ft_splen(char *s);
-void	ft_heredoc(char **origin, char *sep, int till_sep);
+void	ft_heredoc(t_mini **ms, char **origin, char *sep, int till_sep);
 void	ft_promptpipe(char **origin);
 void	ft_addnl(char **origin);
-void	ft_reader(char **origin, char *prompt, char *c);
+char	*ft_getenv(t_mini **ms, char *line);
+void	ft_reader(t_mini **ms, char **origin, char *prompt, char *c);
 /*
 ** EXEC
 */
@@ -148,13 +149,13 @@ void	ft_close_quote(char *s, int *i, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_countwords1(char *s);
 void	ft_trimlist(t_list	*lst);
-char	*ft_expander(char *line);
+char	*ft_expander(t_mini **ms, char *line);
 char	*exit_exp(char *line);
 int		content_is(t_list *lst, const char *s);
 void	lst_freecont_n_skip(t_list **lst);
 char	*ft_strjoin3(char *s1, char *s2, int flag);
 char	*add_dapex(char	*line, char	*trim);
-void	ft_putinhdoc_n_free(char *line);
+void	ft_putinhdoc_n_free(t_mini **ms, char *line);
 
 /*
 **SIGNAL
