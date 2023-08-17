@@ -93,7 +93,7 @@ char	*exit_exp(char *line)
 	char	*tmp;
 
 	i = -1;
-	if (ft_strchr(line, '$'))
+	if (ft_chr(line, '$'))
 	{
 		while (line[++i])
 		{

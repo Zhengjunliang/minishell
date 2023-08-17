@@ -20,7 +20,7 @@ static int	ft_endread(char *c, char **line, char **origin)
 		return (1);
 	if (*c == '\'' || *c == '\"')
 	{
-		if (ft_strchr(*line, *c))
+		if (ft_chr(*line, *c))
 		{
 			a = 1;
 			ft_search_last_n_scale(line, *c);

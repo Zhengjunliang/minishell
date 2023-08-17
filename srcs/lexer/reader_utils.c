@@ -21,7 +21,7 @@ void	ft_putinhdoc_n_free(char *line)
 	tmp = ft_strtrim(line, "\n");
 	if (line && *line)
 		free(line);
-	if (ft_strchr(tmp, '\"'))
+	if (ft_chr(tmp, '\"'))
 	{
 		line = ft_expander(tmp);
 		line = add_dapex(line, ft_strtrim(line, "\""));

@@ -16,15 +16,14 @@ int	apex_exp(t_exp **exp, char *line)
 {
 	int		i;
 	char	*trim;
-	
-	if (ft_strchr(line, 39))
+
+	if (ft_chr(line, 39))
 	{
 		i = -1;
 		(*exp)->cmds = ft_split(line, ' ');
 		while ((*exp)->cmds[++i])
 		{
-			if (ft_strchr((*exp)->cmds[i], 39) 
-				&& ft_strchr((*exp)->cmds[i], '$'))
+			if (ft_chr((*exp)->cmds[i], 39) && ft_chr((*exp)->cmds[i], '$'))
 			{
 				trim = ft_strtrim((*exp)->cmds[i], "\"\'$");
 				if (getenv(trim))
@@ -50,7 +49,7 @@ void	exp_line(t_exp **exp)
 	i = -1;
 	while ((*exp)->cmds[++i])
 	{
-		if (ft_strchr((*exp)->cmds[i], '$'))
+		if (ft_chr((*exp)->cmds[i], '$'))
 		{
 			trim = ft_strtrim((*exp)->cmds[i], "$\"");
 			if (getenv(trim))
@@ -77,7 +76,7 @@ char	*multi_exp(t_exp **exp, char *line)
 	int		i;
 
 	i = 0;
-	if (ft_strchr(line, '\"') && ft_strchr(line, '$') && ft_strchr(line, '\''))
+	if (ft_chr(line, '\"') && ft_chr(line, '$') && ft_chr(line, '\''))
 		apex_exp(exp, line);
 	else
 		(*exp)->cmds = ft_split(line, ' ');
@@ -107,13 +106,12 @@ char	*ft_expander(char *line)
 	ktm = 0;
 	exp = ft_calloc(sizeof(t_exp), 1);
 	line = exit_exp(line);
-	if (ft_strchr(line, '$') && !ft_strchr(line, ' '))
+	if (ft_chr(line, '$') && !ft_chr(line, ' '))
 	{
 		exp->trim = ft_strtrim(line, "$\"");
 		if (getenv(exp->trim))
 			line = free_and_replace(line, ft_strdup(getenv(exp->trim)));
-		else if (ft_strchr(line, '\"') && ft_strchr(line, '$') 
-			&& ft_strchr(line, '\''))
+		else if (ft_chr(line, '\"') && ft_chr(line, '$') && ft_chr(line, '\''))
 		{
 			ktm = apex_exp(&exp, line);
 			line = free_and_replace(line, exp->cmds[0]);
@@ -121,10 +119,9 @@ char	*ft_expander(char *line)
 		}
 		free(exp->trim);
 	}
-	else if (ft_strchr(line, '$') && ft_strchr(line, ' '))
+	else if (ft_chr(line, '$') && ft_chr(line, ' '))
 		line = multi_exp(&exp, line);
-	if ((ft_strchr(line, '\'') && ktm) || (ft_strchr(line, '$') 
-			&& ft_strchr(line, ' ')))
+	if ((ft_chr(line, '\'') && ktm) || (ft_chr(line, '$') && ft_chr(line, ' ')))
 		line = add_dapex(line, ft_strtrim(line, "\""));
 	free(exp);
 	return (line);

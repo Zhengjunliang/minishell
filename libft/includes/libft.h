@@ -27,7 +27,7 @@ int		ft_isdigit(int num);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 char	*ft_strdup(const char *s1);
-char	*ft_strchr(const char *s, int c);
+char	*ft_chr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strjoin2(char *s1, char *s2);
 int		ft_strcmp(const char *s1, const char *s2);
