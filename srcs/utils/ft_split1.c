@@ -12,6 +12,35 @@
 
 #include "minishell.h"
 
+char	*add_dapex(char	*line, char	*trim)
+{
+	free(line);
+	trim = ft_strjoin3("\"", trim, 1);
+	trim = ft_strjoin3(trim, "\"", 0);
+	return (trim);
+}
+
+int	ft_sl(const char *s)
+{
+	int	i;
+
+	if (!s || !(*s))
+		return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+int	content_is(t_list *lst, const char *s)
+{
+	if (!(ft_strncmp((char *)((lst)->content), s,
+			ft_sl((char *)((lst)->content)))))
+		return (1);
+	else
+		return (0);
+}
+
 static int	ft_wordlen(char *s)
 {
 	int	len;

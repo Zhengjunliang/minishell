@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		ft_nbrlen(long n)
+int	ft_nbrlen(long n)
 {
 	int	size;
 
@@ -29,7 +29,7 @@ int		ft_nbrlen(long n)
 	return (size);
 }
 
-int		ft_power(int nbr, int pow)
+int	ft_power(int nbr, int pow)
 {
 	int	res;
 
@@ -53,7 +53,8 @@ char	*ft_itoa(int n)
 
 	i = 0;
 	nbr = n;
-	if (!(s = malloc(sizeof(char) * (ft_nbrlen(nbr) + 1))))
+	s = malloc(sizeof(char) * (ft_nbrlen(nbr) + 1));
+	if (!s)
 		return (NULL);
 	if (nbr < 0)
 	{

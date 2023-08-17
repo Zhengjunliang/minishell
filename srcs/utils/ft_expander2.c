@@ -107,17 +107,3 @@ char	*exit_exp(char *line)
 	}
 	return (line);
 }
-
-char	*add_dapex(char	*line, char	*trim)
-{
-	free(line);
-	trim = ft_strjoin3("\"", trim, 1);
-	trim = ft_strjoin3(trim, "\"", 0);
-	return (trim);
-}
-
-char	*free_and_replace(char	*line, char	*dup)
-{
-	free(line);
-	return (dup);
-}

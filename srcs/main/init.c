@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	set_env(t_mini **mini, char **envp)
+void	init_env(t_mini **mini, char **envp)
 {
 	int	i;
 
@@ -37,5 +37,5 @@ void	init(t_mini **mini, char **envp)
 	(*mini)->prompt = ft_strjoin2((*mini)->prompt, "$ \033[0;37m");
 	(*mini)->stdin_fd = dup(STDIN_FILENO);
 	(*mini)->stdout_fd = dup(STDOUT_FILENO);
-	set_env(mini, envp);
+	init_env(mini, envp);
 }

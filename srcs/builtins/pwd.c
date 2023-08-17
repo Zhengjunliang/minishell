@@ -12,6 +12,16 @@
 
 #include "minishell.h"
 
+t_cmd	*ft_cmdlast(t_cmd *cmd)
+{
+	if (cmd)
+	{
+		while (cmd->next)
+			cmd = cmd->next;
+	}
+	return (cmd);
+}
+
 void	ft_pwd(t_mini **ms)
 {
 	(*ms)->pwd = getcwd(NULL, 0);

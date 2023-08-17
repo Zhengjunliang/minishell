@@ -14,7 +14,7 @@
 
 int	g_exit;
 
-static int	is_valid_input(char *s)
+static int	check_input(char *s)
 {
 	int	i;
 
@@ -27,7 +27,16 @@ static int	is_valid_input(char *s)
 	return (0);
 }
 
-int main(int ac, char **av, char **envp)
+void	minishell_loop(t_mini *mini)
+{
+	if (check_input(mini->input))
+		parse(&mini);
+	if (ft_strlen(mini->input) != 0 && mini->hist == true)
+		add_history(mini->input);
+	free(mini->input);
+}
+
+int	main(int ac, char **av, char **envp)
 {
 	t_mini	*mini;
 
@@ -39,18 +48,14 @@ int main(int ac, char **av, char **envp)
 	init(&mini, envp);
 	while (1)
 	{
-		signal(SIGINT, sig_int); // Control -C
-		signal(SIGQUIT, SIG_IGN); // Control -"\"
+		signal(SIGINT, sig_int);
+		signal(SIGQUIT, SIG_IGN);
 		mini->hist = true;
 		mini->input = readline(mini->prompt);
 		mini->exit = ft_exit(&mini);
 		if (mini->exit == 1)
 			break ;
-		if (is_valid_input(mini->input))
-			cmd_builder(&mini);
-		if (ft_strlen(mini->input) != 0 && mini->hist == true)
-			add_history(mini->input);
-		free(mini->input);
+		minishell_loop(mini);
 	}
 	rl_clear_history();
 	free_all(&mini);

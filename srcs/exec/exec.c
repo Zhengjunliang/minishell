@@ -12,19 +12,19 @@
 
 #include "minishell.h"
 
-void	cmd_builder(t_mini **ms)
+void	parse(t_mini **ms)
 {
 	int		i;
 
 	if (!access(HERED, F_OK))
 		unlink(HERED);
-	ft_readifyouneed(&((*ms)->input), ms);
+	read_input(&((*ms)->input), ms);
 	(*ms)->cmd = ft_split1((*ms)->input);
 	i = -1;
 	while ((*ms)->cmd[++i])
 		(*ms)->cmd[i] = ft_expander((*ms)->cmd[i]);
 	(*ms)->list = lexer((*ms)->cmd);
-	ft_trimlist((*ms)->list);  //cancellato i quotes ''""
+	ft_trimlist((*ms)->list);
 	(*ms)->cmd_list = create_cmdlst((*ms)->list, *ms);
 	if ((*ms)->cmd_list == NULL && (*ms)->hist)
 		perror("Wrong syntax");

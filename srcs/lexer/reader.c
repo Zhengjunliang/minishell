@@ -102,12 +102,12 @@ static int	handle_quotes(int dc, int sc, char **origin)
 	return (1);
 }
 
-void	ft_readifyouneed(char **origin, t_mini **ms)
+void	read_input(char **origin, t_mini **ms)
 {
 	int		dc;
 	int		sc;
 	char	*sep;
-	(void)ms;
+
 	ft_count_quotes(*origin, &dc, &sc);
 	if (handle_quotes(dc, sc, origin))
 		return ;

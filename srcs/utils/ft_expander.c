@@ -16,14 +16,15 @@ int	apex_exp(t_exp **exp, char *line)
 {
 	int		i;
 	char	*trim;
-
+	
 	if (ft_strchr(line, 39))
 	{
 		i = -1;
 		(*exp)->cmds = ft_split(line, ' ');
 		while ((*exp)->cmds[++i])
 		{
-			if (ft_strchr((*exp)->cmds[i], 39) && ft_strchr((*exp)->cmds[i], '$'))
+			if (ft_strchr((*exp)->cmds[i], 39) 
+				&& ft_strchr((*exp)->cmds[i], '$'))
 			{
 				trim = ft_strtrim((*exp)->cmds[i], "\"\'$");
 				if (getenv(trim))
@@ -111,7 +112,8 @@ char	*ft_expander(char *line)
 		exp->trim = ft_strtrim(line, "$\"");
 		if (getenv(exp->trim))
 			line = free_and_replace(line, ft_strdup(getenv(exp->trim)));
-		else if (ft_strchr(line, '\"') && ft_strchr(line, '$') && ft_strchr(line, '\''))
+		else if (ft_strchr(line, '\"') && ft_strchr(line, '$') 
+			&& ft_strchr(line, '\''))
 		{
 			ktm = apex_exp(&exp, line);
 			line = free_and_replace(line, exp->cmds[0]);
@@ -121,7 +123,8 @@ char	*ft_expander(char *line)
 	}
 	else if (ft_strchr(line, '$') && ft_strchr(line, ' '))
 		line = multi_exp(&exp, line);
-	if ((ft_strchr(line, '\'') && ktm) || (ft_strchr(line, '$') && ft_strchr(line, ' ')))
+	if ((ft_strchr(line, '\'') && ktm) || (ft_strchr(line, '$') 
+			&& ft_strchr(line, ' ')))
 		line = add_dapex(line, ft_strtrim(line, "\""));
 	free(exp);
 	return (line);

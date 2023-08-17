@@ -65,3 +65,9 @@ void	free_cmd(t_cmd *cmd)
 		cmd = tmp;
 	}
 }
+
+char	*free_and_replace(char	*line, char	*dup)
+{
+	free(line);
+	return (dup);
+}

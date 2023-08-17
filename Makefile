@@ -18,15 +18,16 @@ CFLAGS	=	-Wall -Wextra -Werror -I includes/
 LIBFT	=	libft/libft.a
 
 BUILTINS	=	exit builtin echo pwd env cd \
-				cmdlst
+				cmdlst cmd_utils
 
-EXEC	=	exec reader_utils reader redirect get_next_line executor
+EXEC	=	exec executor
 
 MAIN	=	main free signal init
 
-LEXER	=	lexer list lexer_utils
+LEXER	=	lexer list reader_utils reader read_utils2 \
+			redirect get_next_line
 
-UTILS	=	ft_split1 ft_countwords1 ft_subsplit ft_creatlist \
+UTILS	=	ft_split1 ft_countwords1 ft_subsplit \
 			ft_trims ft_expander ft_expander2
 
 SRC 	=	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
